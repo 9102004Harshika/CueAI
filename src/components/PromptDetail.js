@@ -144,8 +144,8 @@ const PromptDetail = () => {
               </button>
             )}
           </div>
-          <h1 className="text-5xl pt-5">{prompt.title}</h1>
-          <p className="text-xs text-gray-900 bg-white w-[70px] p-1 rounded-md text-center mt-5 capitalize">
+          <h1 className="pt-5">{prompt.title}</h1>
+          <p className="text-xs [color:var(--textColor)] bg-white w-[70px] p-1 rounded-md text-center mt-5 capitalize">
             @{prompt.username}
           </p>
           <p className="pt-5">
@@ -157,7 +157,7 @@ const PromptDetail = () => {
             <span className="text-5xl">{prompt.price}</span>
           </h1>
           <div className="pt-5 flex">
-            <button className="getPrompt p-3 text-gray-900 rounded-md text-xl" onClick={handleGetPromptClick}>
+            <button className="getPrompt p-3 [color:var(--textColor)] rounded-md text-xl" onClick={handleGetPromptClick}>
               Get Prompt
             </button>
             <div className="flex justify-center">
@@ -180,7 +180,7 @@ const PromptDetail = () => {
         {/* User Information */}
         <div className="pt-10 pl-10 w-[1200px] pr-10">
           <div className="border border-white border-1 h-[600px] p-5 rounded-md overflow-y-scroll custom-scrollbar">
-            <h1 className="text-2xl pt-2 pb-2 font-bold">Prompt Details</h1>
+            <h1 className="pt-2 pb-2">Prompt Details</h1>
             <label className="pb-2 font-bold text-sm">Model </label>
             <p className="pb-2 text-sm">{prompt.model}</p>
             <label className="font-bold text-sm">Example Input:</label>
@@ -199,7 +199,7 @@ const PromptDetail = () => {
         <div className="flex flex-wrap">
           {
             userPrompts.length === 0 ?(
-              <p className=" text-gray-400 ml-5">This author has only one prompt</p>
+              <p className=" [color:var(--textColor)] ml-5">This author has only one prompt</p>
             ):(
               userPrompts.map((userPrompt) => (
                 <Link

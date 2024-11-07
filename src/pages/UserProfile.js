@@ -120,11 +120,11 @@ const UserProfile = () => {
         </div>
         <div className='flex ml-[700px] gap-5'>
           {!editing ? (
-            <button className='bg-white mt-[90px] rounded-md text-gray-900 p-1' onClick={handleEditClick}>Edit Profile</button>
+            <button className='bg-white mt-[90px] rounded-md [color:var(--textColor)] p-1' onClick={handleEditClick}>Edit Profile</button>
           ) : (
             <>
-              <button className='bg-white mt-[85px] rounded-md text-gray-900 p-1' onClick={handleSaveClick}>Save Profile</button>
-              <button className='bg-white mt-[85px] rounded-md text-gray-900 p-1' onClick={handleCancelClick}>Cancel</button>
+              <button className='bg-white mt-[85px] rounded-md [color:var(--textColor)] p-1' onClick={handleSaveClick}>Save Profile</button>
+              <button className='bg-white mt-[85px] rounded-md [color:var(--textColor)] p-1' onClick={handleCancelClick}>Cancel</button>
             </>
           )}
         </div>
@@ -170,14 +170,14 @@ const UserProfile = () => {
                 <Link to={`/prompt/${prompt._id}`} className="prompt-card-link" key={prompt._id}>
                   <div className="prompts-card bg-white rounded-lg shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl">
                     <div className="prompt-card-content p-4">
-                      <h2 className="font-bold text-md mb-2 text-gray-700">{prompt.title}</h2>
-                      <p className="text-gray-700 text-sm mb-4">{prompt.description ? prompt.description.substring(0, 100) + '...' : 'No description available'}</p>
+                      <h2 className="font-bold text-md mb-2 [color:var(--textColor)]">{prompt.title}</h2>
+                      <p className="[color:var(--textColor)] text-sm mb-4">{prompt.description ? prompt.description.substring(0, 100) + '...' : 'No description available'}</p>
                       <div className='flex gap-10'> 
-                        <p className="text-gray-900 font-semibold mb-2">Price: ₹{prompt.price}</p>
-                        <p className="text-gray-600">Model: <span className="capitalize">{prompt.model}</span></p>
+                        <p className="[color:var(--textColor)] font-semibold mb-2">Price: ₹{prompt.price}</p>
+                        <p className="[color:var(--textColor)]">Model: <span className="capitalize">{prompt.model}</span></p>
                       </div>
                     </div>
-                    <button className="prompt-buy-button text-gray-900 py-2 px-4 rounded-b-lg w-full text-center">
+                    <button className="prompt-buy-button [color:var(--textColor)] py-2 px-4 rounded-b-lg w-full text-center">
                       Buy Now
                     </button>
                   </div>
@@ -199,15 +199,15 @@ const UserProfile = () => {
                 <Link to={`/${username}/orders`} className="order-card-link" key={item._id}>
                 <div className="prompts-card bg-white rounded-lg shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl">
                  <div className="prompt-card-content p-4">
-                   <h2 className="font-bold text-md mb-2 text-gray-700">{item.title}</h2>
-                   <p className="text-gray-700 text-sm mb-4">{item.description ? item.description.substring(0, 100) + '...' : 'No description available'}</p>
+                   <h2 className="font-bold text-md mb-2 [color:var(--textColor)]">{item.title}</h2>
+                   <p className="[color:var(--textColor)] text-sm mb-4">{item.description ? item.description.substring(0, 100) + '...' : 'No description available'}</p>
                    <div className='flex gap-10'> 
-                     <p className="text-gray-900 font-semibold mb-2">Price: ₹{item.price}</p>
-                     <p className="text-gray-900 font-semibold mb-2">Author: {promptAuthors[item.promptId] || 'Unknown'}</p> {/* Accessing the author from the mapping */}
+                     <p className="[color:var(--textColor)] font-semibold mb-2">Price: ₹{item.price}</p>
+                     <p className="[color:var(--textColor)] font-semibold mb-2">Author: {promptAuthors[item.promptId] || 'Unknown'}</p> {/* Accessing the author from the mapping */}
                      
                    </div>
                  </div>
-                 <button className="prompt-buy-button text-gray-900 py-2 px-4 rounded-b-lg w-full text-center">
+                 <button className="prompt-buy-button [color:var(--textColor)] py-2 px-4 rounded-b-lg w-full text-center">
                    View Order
                  </button>
                </div>

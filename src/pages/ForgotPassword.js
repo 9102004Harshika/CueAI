@@ -60,21 +60,21 @@ const ForgotPassword = () => {
                 &nbsp;I accept the{" "}
                 <a
                   href="#"
-                  className="bg-gradient-to-r from-[rgb(214,133,134)]  to-[rgb(219,194,144)] text-transparent  bg-clip-text font-semibold"
+                  className="[background:var(--bg-gradient)] clipText font-semibold"
                 >
                   Terms of Use
                 </a>{" "}
                 &{" "}
                 <a
                   href="#"
-                  className="bg-gradient-to-r from-[rgb(214,133,134)]  to-[rgb(219,194,144)] text-transparent  bg-clip-text font-semibold"
+                  className="[background:var(--bg-gradient)] clipText font-semibold"
                 >
                   Privacy Policy
                 </a>
               </span>
             </div>
             <div className="mt-5">
-              <button type="submit" className="w-full rounded-md bg-gradient-to-r from-[rgb(219,194,144)] to-[rgb(214,133,134)] text-slate-900 py-3 text-center">
+              <button type="submit" className="w-full rounded-md button py-3 text-center">
                 Send OTP
               </button>
             </div>
@@ -92,7 +92,7 @@ const ForgotPassword = () => {
               />
             </div>
             <div className="mt-5">
-              <button type="submit" className="w-full rounded-md bg-gradient-to-r from-[rgb(219,194,144)] to-[rgb(214,133,134)] text-slate-900 py-3 text-center">
+              <button type="submit" className="w-full rounded-md button py-3 text-center">
                 Verify OTP
               </button>
             </div>

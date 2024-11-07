@@ -29,7 +29,7 @@ const ApprovePrompt = () => {
   return (
     <>
       <div className="pt-10 pl-20">
-        <h1 className="font-bold text-4xl">Approve Prompts</h1>
+        <h1>Approve Prompts</h1>
         <p className="text-xs text-[rgb(161,161,169)] italic">
           Check the prompts and approve them
         </p>
@@ -43,14 +43,14 @@ const ApprovePrompt = () => {
               <div className="prompt-card-link" key={prompt._id}>
                 <div className="prompts-card bg-white rounded-lg shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl">
                   <div className="prompt-card-content p-4">
-                    <h2 className="font-bold text-md mb-2 text-gray-700">{prompt.title}</h2>
-                    <p className="text-gray-700 text-sm mb-4">{prompt.description.substring(0, 100)}...</p>
+                    <h2 className="font-bold text-md mb-2 [color:var(--textColor)]">{prompt.title}</h2>
+                    <p className="[color:var(--textColor)] text-sm mb-4">{prompt.description.substring(0, 100)}...</p>
                     <div className='flex gap-10'>
-                      <p className="text-gray-900 font-semibold mb-2">Price: ₹{prompt.price}</p>
-                      <p className="text-gray-600">Model: <span className="capitalize">{prompt.model}</span></p>
+                      <p className="[color:var(--textColor)] font-semibold mb-2">Price: ₹{prompt.price}</p>
+                      <p className="[color:var(--textColor)]">Model: <span className="capitalize">{prompt.model}</span></p>
                     </div>
                   </div>
-                  <button onClick={() => approvePrompt(prompt._id)} className="prompt-buy-button text-gray-900 py-2 px-4 rounded-b-lg w-full text-center">
+                  <button onClick={() => approvePrompt(prompt._id)} className="prompt-buy-button [color:var(--textColor)] py-2 px-4 rounded-b-lg w-full text-center">
                     Approve
                   </button>
                 </div>

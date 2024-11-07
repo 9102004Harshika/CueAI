@@ -34,7 +34,7 @@ const Success = () => {
         <p className="text-white mb-6">Thank you for your purchase. Your order has been processed successfully.</p>
         <Link
           to={`/${username}/orders`}
-          className="bg-gradient-to-r from-[rgb(219,194,144)] to-[rgb(214,133,134)] text-slate-900 font-bold py-3 px-6 rounded-lg hover:bg-white focus:outline-none focus:ring-2 focus:ring-white"
+          className="button font-bold py-3 px-6 rounded-lg hover:bg-white focus:outline-none focus:ring-2 focus:ring-white"
         >
           Go to Orders
         </Link>

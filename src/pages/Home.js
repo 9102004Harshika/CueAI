@@ -46,13 +46,13 @@ const Home = () => {
     <div className='flex ml-12 mr-12 justify-between mt-18'>
      <div className='p-20'>
        <button className='mt-5 bg-slate-950 text-[13px]  text-white p-1   rounded-md'>AI Image</button>
-       <h1 className='text-[35px] font-bold'>Struggling to spark that perfect creative idea? </h1>
-       <h1 className='text-[35px] font-bold'> CueAI can help!...</h1>
-       <span className='text-gray-400 font-bold text-[20px]'><p > This innovative marketplace connects creators with inspiring prompts, </p>
+       <h1 >Struggling to spark that perfect creative idea? </h1>
+       <h1 > CueAI can help!...</h1>
+       <span className='[color:var(--textColor)] font-bold text-[20px]'><p > This innovative marketplace connects creators with inspiring prompts, </p>
          <p>igniting imaginations and fueling projects. Whether you're a seasoned writer</p> 
          <p>in search of a fresh story concept or a budding artist seeking a captivating</p>
          <p>visual prompt, CueAI offers a vast collection to jumpstart your creative journey.</p></span>
-         <button className='mt-5 bg-gradient-to-r from-[rgb(219,194,144)] to-[rgb(214,133,134)] font-bold text-slate-900 p-3 rounded-md'>Visit Shop</button>
+         <button className='mt-5 button font-bold  p-3 rounded-md'>Visit Shop</button>
      </div>
      <div className='mt-20'><img src={ai} width={400} alt='ai'/></div>
     </div>
@@ -62,9 +62,9 @@ const Home = () => {
     <div className='flex ml-12 mr-12 justify-between mt-18'>
      <div className='p-20'>
        <button className='mt-5 bg-slate-950 text-[13px]  text-white p-1   rounded-md'>Future</button>
-       <h1 className='text-[35px] font-bold'>Unleash your inner idea machine and  </h1>
-       <h1 className='text-[35px] font-bold'> turn your creativity into cash with CueAI!...</h1>
-       <span className='text-gray-400 font-bold text-[18px]'>
+       <h1 >Unleash your inner idea machine and  </h1>
+       <h1 > turn your creativity into cash with CueAI!...</h1>
+       <span className='[color:var(--textColor)] font-bold text-[18px]'>
         <p>This booming marketplace connects creators hungry for inspiration with the<br/>
           sparks you ignite.  Whether you craft captivating writing prompts, dream up<br/>
           thought-provoking photography themes, or weave enchanting storylines for<br/>
@@ -72,15 +72,15 @@ const Home = () => {
            earn from your passion. Upload your prompts with ease, set your price,<br/>
             and watch as your ideas fuel countless creative projects.
             <br/> CueAI - where your creative genius meets a global audience.</p></span>
-         <button className='mt-5 bg-gradient-to-r from-[rgb(219,194,144)] to-[rgb(214,133,134)] font-bold text-slate-900 p-3 rounded-md'>Become a Seller</button>
+         <button className='mt-5 button font-bold p-3 rounded-md'>Become a Seller</button>
      </div>
      <div className='mt-20 pt-5 mr-10'><img src={ai3} width={450} alt='ai3' /></div>
     </div>
      <Banner imageLink={banner3} mainText="Create an app using prompts" description="Build apps by generating any image"  buttonText="Let's Build"/>
      <div className='text-center mt-20 '>
-       <h1 className='text-[35px] font-bold '>Prompt Marketplace for Artificial Intelligence</h1>
-       <div className='  text-slate-400'>----------------------</div>
-       <p className='text-gray-400 font-bold text-[20px] ml-44 mr-44 mt-5'>Unleash your creative potential and ignite imaginations with CueAI,
+       <h1>Prompt Marketplace for Artificial Intelligence</h1>
+       <div className=' [color:var(--textColor)]'>----------------------</div>
+       <p className='[color:var(--textColor)] font-bold text-[20px] ml-44 mr-44 mt-5'>Unleash your creative potential and ignite imaginations with CueAI,
         the groundbreaking marketplace for prompts! Struggling for inspiration? Browse our vast library, meticulously curated for writers, artists, 
         and creators of all stripes. From captivating story starters to thought-provoking design challenges, CueAI provides the perfect spark to
          jumpstart your next masterpiece. Whether you're a seasoned professional or a budding talent, CueAI empowers you to take your creativity to the next level.
@@ -111,10 +111,10 @@ const Home = () => {
         <img src={logo} className='w-10 h-10' alt='logo'/>
         <span className="text-3xl text-white ml-3">CueAI</span>
       </div>
-      <p className='text-sm text-slate-300 mt-2'>We spark creativity, you spark sales.</p>
+      <p className='text-sm [color:var(--textColor)] mt-2'>We spark creativity, you spark sales.</p>
     </div>
 
-    <div className='flex justify-between gap-5 mr-12 text-slate-300'>
+    <div className='flex justify-between gap-5 mr-12 [color:var(--textColor)]'>
       <a href='/login' className='hover:text-white'>Login</a>
       <a href='/signup' className='hover:text-white'>Signup</a>
       <a href='/terms' className='hover:text-white'>Terms and Conditions</a>
@@ -123,7 +123,7 @@ const Home = () => {
     </div>
   </div>
 
-  <div className='text-center mt-5 text-slate-300'>
+  <div className='text-center mt-5 [color:var(--textColor)]'>
     <h4 className='flex justify-center items-center gap-2'>
       Built with 
       <span className='text-[rgb(214,133,134)]'>
@@ -143,7 +143,7 @@ const Home = () => {
    {showTopButton && (
         <button
           onClick={scrollToTop}
-          className="bg-gradient-to-r from-[rgb(219,194,144)] to-[rgb(214,133,134)] text-slate-900 fixed bottom-3 right-10  p-3 rounded-full hover:bg-slate-800 transition-all duration-300"
+          className="button fixed bottom-3 right-10  p-3 rounded-full hover:bg-slate-800 transition-all duration-300"
         >
           <BiSolidUpArrow/>
         </button>

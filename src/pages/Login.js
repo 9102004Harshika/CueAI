@@ -62,7 +62,7 @@ const Login = () => {
         <div className="flex rounded-lg shadow-lg w-full sm:w-3/4 lg:w-1/2 bg-[rgb(69,69,102)] sm:mx-0 h-[500px]">
           <div className="flex flex-col w-full md:w-1/2 p-4">
             <div className="flex flex-col flex-1 justify-center mb-8">
-              <h1 className="text-4xl text-center">Welcome Back</h1>
+              <h1 className="text-center">Welcome Back</h1>
               <div className="w-full mt-4">
                 
                 {/* Form to send OTP if it hasn't been sent */}
@@ -82,7 +82,7 @@ const Login = () => {
                     <div className="flex flex-col mt-8">
                       <button
                         type="submit"
-                        className="bg-gradient-to-r from-[rgb(219,194,144)] to-[rgb(214,133,134)] text-slate-900 py-2 px-4 rounded"
+                        className="button py-2 px-4 rounded"
                         disabled={loading}
                       >
                         {loading ? 'Sending OTP...' : 'Send OTP'}
@@ -105,7 +105,7 @@ const Login = () => {
                     <div className="flex flex-col mt-8">
                       <button
                         type="submit"
-                        className="bg-gradient-to-r from-[rgb(219,194,144)] to-[rgb(214,133,134)] text-slate-900 py-2 px-4 rounded"
+                        className="button py-2 px-4 rounded"
                         disabled={loading}
                       >
                         {loading ? 'Verifying OTP...' : 'Verify OTP'}

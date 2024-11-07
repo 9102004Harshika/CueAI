@@ -3,7 +3,7 @@ import React from 'react';
 const PrivacyPolicy = () => {
   return (
     <div className="pl-20 pt-20">
-      <h1 className="text-4xl mb-6">Privacy Policy</h1>
+      <h1 className="mb-6">Privacy Policy</h1>
       
       <p className='w-[700px] text-xl'>Welcome to CueAI! Your privacy is important to us. This Privacy Policy outlines how we collect, use, and protect your information when you use our services.</p>
       

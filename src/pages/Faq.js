@@ -75,7 +75,7 @@ const FAQ = () => {
               value={issue.name}
               onChange={handleInputChange}
               required
-              className="w-[200px] p-2 text-gray-900 border border-gray-300 rounded"
+              className="w-[200px] p-2 [color:var(--textColor)] border border-gray-300 rounded"
             /></div>
 
 
@@ -87,7 +87,7 @@ const FAQ = () => {
               value={issue.email}
               onChange={handleInputChange}
               required
-              className="w-[300px] p-2 border text-gray-900 border-gray-300 rounded"
+              className="w-[300px] p-2 border [color:var(--textColor)] border-gray-300 rounded"
             />
           </div>
           </div>
@@ -99,10 +99,10 @@ const FAQ = () => {
               value={issue.message}
               onChange={handleInputChange}
               required
-              className="w-[700px] h-[200px] text-gray-900 p-2 border border-gray-300 rounded"
+              className="w-[700px] h-[200px] [color:var(--textColor)] p-2 border border-gray-300 rounded"
             ></textarea>
           </div>
-          <button type="submit" className="bg-gradient-to-r from-[rgb(219,194,144)] to-[rgb(214,133,134)] text-slate-900 px-4 py-2 rounded">
+          <button type="submit" className="button px-4 py-2 rounded">
             Submit Issue
           </button>
         </form>

@@ -62,17 +62,17 @@ const Cart = () => {
 
   return (
     <div className="cart-container bg-[#222236] min-h-screen p-10">
-      <h1 className="text-3xl font-bold mb-6">You have {totalItems} prompt{totalItems !== 1 ? 's' : ''} in your cart</h1>
+      <h1 className="mb-6">You have {totalItems} prompt{totalItems !== 1 ? 's' : ''} in your cart</h1>
       {cartItems.length > 0 ? (
         <div className="cart-items grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {cartItems.map((item) => (
             <div key={item._id} className="cart-item bg-[rgb(57,57,84)] p-6 rounded-lg shadow-lg">
               <h2 className="text-xl text-white font-semibold mb-2">{item.promptId.title}</h2>
-              <p className="text-gray-400 mb-4">{item.promptId.description}</p>
+              <p className="[color:var(--textColor)] mb-4">{item.promptId.description}</p>
               <p className="text-lg text-white font-bold">Price: ₹{item.promptId.price}</p>
                   <button
                     onClick={() => handleRemoveItem(item._id)}
-                    className="mt-2 bg-gradient-to-r from-[rgb(219,194,144)] to-[rgb(214,133,134)] text-slate-900 font-bold py-2 px-3 rounded-lg hover:bg-white focus:outline-none focus:ring-2 focus:ring-white"
+                    className="mt-2 button font-bold py-2 px-3 rounded-lg hover:bg-white focus:outline-none focus:ring-2 focus:ring-white"
                   >
                     Remove Prompt
                   </button>
@@ -80,12 +80,12 @@ const Cart = () => {
           ))}
         </div>
       ) : (
-        <p className="text-lg text-gray-400">No prompts in the cart...</p>
+        <p className="text-lg [color:var(--textColor)]">No prompts in the cart...</p>
       )}
       {cartItems.length > 0 && (
         <button
           onClick={handleCheckout}
-          className="mt-8 bg-gradient-to-r from-[rgb(219,194,144)] to-[rgb(214,133,134)] text-slate-900 font-bold py-3 px-6 rounded-lg hover:bg-white focus:outline-none focus:ring-2 focus:ring-white"
+          className="mt-8 button font-bold py-3 px-6 rounded-lg hover:bg-white focus:outline-none focus:ring-2 focus:ring-white"
         >
           Proceed to Checkout
         </button>

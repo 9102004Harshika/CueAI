@@ -3,7 +3,7 @@ import React from 'react';
 const TermsAndConditions = () => {
   return (
     <div className="pl-20 pt-20">
-      <h1 className="text-4xl mb-6">Terms and Conditions</h1>
+      <h1 className="mb-6">Terms and Conditions</h1>
       
       <p className='w-[700px] text-xl'>Welcome to CueAI, a marketplace for creative and AI-driven prompts. By using our services, you agree to the following Terms and Conditions, which govern your use of the platform.</p>
       

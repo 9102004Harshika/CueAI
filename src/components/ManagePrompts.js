@@ -96,7 +96,7 @@ const ManagePrompts = () => {
   return (
     <div className="container mx-auto px-6 py-10">
       <div className="pt-10 pl-20">
-        <h1 className="font-bold text-4xl">Manage Prompts</h1>
+        <h1>Manage Prompts</h1>
         <p className="text-xs text-[rgb(161,161,169)] italic">Manage all prompts</p>
       </div>
 
@@ -203,13 +203,13 @@ const ManagePrompts = () => {
                     <>
                       <div className='flex '><button
                         onClick={() => setEditPrompt(prompt)}
-                        className="ml-5  text-white px-4 py-2 rounded-md hover:text-slate-900"
+                        className="ml-5  text-white px-4 py-2 rounded-md hover:[color:var(--textColor)]"
                       >
                         <MdEdit />
                       </button>
                       <button
                         onClick={() => handleDelete(prompt._id)}
-                        className="ml-5  text-white px-4 py-2 rounded-md hover:text-slate-900"
+                        className="ml-5  text-white px-4 py-2 rounded-md hover:[color:var(--textColor)]"
                       >
                         <MdDelete />
                       </button></div>
@@ -224,7 +224,7 @@ const ManagePrompts = () => {
 
       {/* Edit Modal */}
       {editPrompt && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center text-slate-900">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center [color:var(--textColor)]">
           <div className="bg-white p-6 rounded-md w-full max-w-lg">
             <h2 className="text-2xl mb-4">Edit Prompt</h2>
             <form

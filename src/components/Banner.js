@@ -9,8 +9,8 @@ const Banner = ({imageLink,mainText,description,colorText,buttonText}) => {
     <div className='absolute mt-[130px] mr-[600px] ml-[50px] '>
         <p className='font-bold text-[50px] '>{mainText}</p>
          <p className='text-[25px] font-bold mt-2'>{description}</p>
-         <p className='text-[30px] font-bold bg-gradient-to-r from-[rgb(214,133,134)] via-[rgb(153,204,153)] to-[rgb(108,127,188)] text-transparent  bg-clip-text'>{colorText}</p>
-         <button className='mt-3 bg-gradient-to-r from-[rgb(219,194,144)] to-[rgb(214,133,134)] font-bold text-slate-900 p-2 rounded-md'>{buttonText}</button>
+         <p className='text-[30px] font-bold [background:var(--text-gradient)] clipText'>{colorText}</p>
+         <button className='mt-3 button p-2 rounded-md'>{buttonText}</button>
         </div>
         
         

@@ -9,7 +9,7 @@ const ImageBand = () => {
   return (
     <>
     <div className="carousel my-0 mx-0 ml-12 mt-[-30px] mb-2 mr-12">
-      <h2 className="text-4xl leading-8 font-semibold mb-12 text-slate-700">
+      <h2 className="text-4xl leading-8 font-semibold mb-12 [color:var(--textColor)]">
        
       </h2>
       <div className="relative overflow-hidden">

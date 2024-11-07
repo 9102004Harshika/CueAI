@@ -8,6 +8,26 @@ body {
   background:#222236;
  color:white
 }
+:root {
+  --bg-gradient: linear-gradient(to right, rgb(219, 194, 144), rgb(214, 133, 134));
+  --textColor: #0f172a; 
+  --text-gradient: linear-gradient(to right, rgb(214, 133, 134), rgb(153, 204, 153), rgb(108, 127, 188));
+}
+h1{
+  font-weight: bold;
+  font-size: 2.25rem;
+  line-height: 2.5rem; 
+}
+.button{
+  background-color: var(--bg-gradient);
+  color: var(--textColor);
+}
+.clipText{
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 ::selection{
   background-color:rgb(219,194,144);
   color :black
@@ -87,7 +107,7 @@ body {
 }
 
 .prompt-buy-button {
-  background: linear-gradient(90deg, #dbca90, #d68586);
+  background: var(--bg-gradient);
   padding: 10px;
   border: none;
   border-radius: 0 0 10px 10px;
@@ -96,7 +116,7 @@ body {
   cursor: pointer;
 }
 .prompts-buy-button {
-  background: linear-gradient(90deg, #dbca90, #d68586);
+  background: var(--bg-gradient);
   padding: 2px;
   border: none;
   border-radius: 10px 10px 10px 10px;
@@ -111,24 +131,7 @@ body {
   background: linear-gradient(90deg, #d68586, #dbca90);
 }
 .getPrompt{
-  background: linear-gradient(90deg, #dbca90, #d68586);
-}
-.loader-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Full height to center vertically */
+  background: var(--bg-gradient);
 }
 
-.loader-gradient {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 80px; /* Same as the loader size */
-  height: 80px; /* Same as the loader size */
-  border-radius: 50%;
-  background: linear-gradient(to right, #ff7e5f, #feb47b); /* Gradient colors */
-  -webkit-mask-image: radial-gradient(circle, white 60%, transparent 100%);
-  mask-image: radial-gradient(circle, white 60%, transparent 100%);
-}
+

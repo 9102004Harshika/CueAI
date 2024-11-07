@@ -115,7 +115,7 @@ const Profile = () => {
               <MdOutlineAddShoppingCart />
             </button>
             <button
-              className="w-20 h-10 bg-white text-gray-900 rounded-md cursor-pointer"
+              className="w-20 h-10 bg-white [color:var(--textColor)] rounded-md cursor-pointer"
               onClick={handleSignOut}
             >
               Sign Out

@@ -102,7 +102,7 @@ export const CreatePrompt = () => {
   return (
     <>
       <div className="pt-10 pl-20">
-        <h1 className="font-bold text-4xl">Create Prompt.</h1>
+        <h1>Create Prompt.</h1>
         <p className="text-xs text-[rgb(161,161,169)] italic">
           Let's create a new prompt
         </p>
@@ -225,7 +225,7 @@ export const CreatePrompt = () => {
           </div>
           <button
             type="submit"
-            className="bg-gradient-to-r from-[rgb(219,194,144)] to-[rgb(214,133,134)] text-slate-900 my-4 py-2 px-4 rounded"
+            className="button my-4 py-2 px-4 rounded"
           >
             Submit
           </button>
@@ -251,7 +251,7 @@ export const EditPrompt = () => {
   return (
     <>
       <div className="pt-10 pl-20">
-        <h1 className="font-bold text-4xl">Choose Prompt.</h1>
+        <h1 >Choose Prompt.</h1>
         <p className="text-xs text-[rgb(161,161,169)] italic">
           Want to make changes in prompt
         </p>
@@ -262,12 +262,12 @@ export const EditPrompt = () => {
               <Link to={`/editprompt/${prompt._id}`} className="prompt-card-link" key={prompt._id}>
                 <div className="prompts-card  bg-white rounded-lg shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl">
                   <div className="prompt-card-content p-4">
-                    <h2 className="font-bold text-md mb-2 text-gray-700">{prompt.title}</h2>
-                    <p className="text-gray-700 text-sm mb-4">{prompt.description.substring(0, 100)}...</p>
-                   <div className='flex gap-10'> <p className="text-gray-900 font-semibold mb-2">Price: ₹{prompt.price}</p>
-                   <p className="text-gray-600">Model: <span className="capitalize">{prompt.model}</span></p></div>
+                    <h2 className="font-bold text-md mb-2 [color:var(--textColor)]">{prompt.title}</h2>
+                    <p className="[color:var(--textColor)] text-sm mb-4">{prompt.description.substring(0, 100)}...</p>
+                   <div className='flex gap-10'> <p className="[color:var(--textColor)] font-semibold mb-2">Price: ₹{prompt.price}</p>
+                   <p className="[color:var(--textColor)]">Model: <span className="capitalize">{prompt.model}</span></p></div>
                   </div>
-                  <button className="prompt-buy-button text-gray-900 py-2 px-4 rounded-b-lg w-full text-center">
+                  <button className="prompt-buy-button [color:var(--textColor)] py-2 px-4 rounded-b-lg w-full text-center">
                     Edit
                   </button>
                 </div>
@@ -342,7 +342,7 @@ export const DeletePrompt = () => {
   return (
     <>
       <div className="pt-10 pl-20">
-        <h1 className="font-bold text-4xl">Delete Prompt</h1>
+        <h1 >Delete Prompt</h1>
         <p className="text-xs text-[rgb(161,161,169)] italic">
           Want to delete the prompt
         </p>
@@ -352,15 +352,15 @@ export const DeletePrompt = () => {
           <div key={prompt._id}>
             <div className="prompts-card bg-white rounded-lg shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl">
               <div className="prompt-card-content p-4">
-                <h2 className="font-bold text-md mb-2 text-gray-700">{prompt.title}</h2>
-                <p className="text-gray-700 text-sm mb-4">{prompt.description.substring(0, 100)}...</p>
+                <h2 className="font-bold text-md mb-2 [color:var(--textColor)]">{prompt.title}</h2>
+                <p className="[color:var(--textColor)] text-sm mb-4">{prompt.description.substring(0, 100)}...</p>
                 <div className='flex gap-10'>
-                  <p className="text-gray-900 font-semibold mb-2">Price: ₹{prompt.price}</p>
-                  <p className="text-gray-600">Model: <span className="capitalize">{prompt.model}</span></p>
+                  <p className="[color:var(--textColor)] font-semibold mb-2">Price: ₹{prompt.price}</p>
+                  <p className="[color:var(--textColor)]">Model: <span className="capitalize">{prompt.model}</span></p>
                 </div>
               </div>
               <button
-                className="prompt-buy-button text-gray-900 py-2 px-4 rounded-b-lg w-full text-center"
+                className="prompt-buy-button [color:var(--textColor)] py-2 px-4 rounded-b-lg w-full text-center"
                 onClick={() => handleDeletePrompt(prompt._id)}
               >
                 Delete
@@ -375,16 +375,16 @@ export const DeletePrompt = () => {
           <div className="flex overflow-x-auto gap-5"> {deletedPrompts.map(prompt => (
             <div key={prompt._id} className=" prompts-card bg-white rounded-lg shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl mb-4">
               <div className="prompt-card-content p-4">
-                <h2 className="font-bold text-md mb-2 text-gray-700">{prompt.title}</h2>
-                <p className="text-gray-700 text-sm mb-4">{prompt.description.substring(0, 100)}...</p>
+                <h2 className="font-bold text-md mb-2 [color:var(--textColor)]">{prompt.title}</h2>
+                <p className="[color:var(--textColor)] text-sm mb-4">{prompt.description.substring(0, 100)}...</p>
                 <div className='flex gap-10'>
-                  <p className="text-gray-900 font-semibold mb-2">Price: ₹{prompt.price}</p>
-                  <p className="text-gray-600">Model: <span className="capitalize">{prompt.model}</span></p>
+                  <p className="[color:var(--textColor)] font-semibold mb-2">Price: ₹{prompt.price}</p>
+                  <p className="[color:var(--textColor)]">Model: <span className="capitalize">{prompt.model}</span></p>
                 </div>
               </div>
               <div className="flex justify-between p-4">
                 <button
-                  className="prompts-buy-button text-gray-900 py-2 px-4 rounded-lg"
+                  className="prompts-buy-button [color:var(--textColor)] py-2 px-4 rounded-lg"
                   onClick={() => handleUndoDelete(prompt._id)}
                 >
                   Undo
@@ -464,7 +464,7 @@ export const BuyPrompt = () => {
   return (
     <>
       <div className="filter-container pt-20 pl-20">
-        <h1 className="font-bold text-4xl">Buy Prompt.</h1>
+        <h1>Buy Prompt.</h1>
         <p className="pt-2 text-xs text-[rgb(161,161,169)] italic">
           Unable to think of a prompt? No worries, buy a prompt!
         </p>
@@ -509,21 +509,21 @@ export const BuyPrompt = () => {
             }} className="prompt-card-link">
               <div className="prompt-card bg-white rounded-lg shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl">
                 <div className="prompt-card-content p-4">
-                  <h2 className="font-bold text-xl mb-2 text-gray-700">{prompt.title}</h2>
-                  <p className="text-gray-700 text-base mb-4">{prompt.description.substring(0, 100)}...</p>
-                  <p className="text-gray-900 font-semibold mb-2">Price: ₹{prompt.price}</p>
-                  <p className="text-gray-600">Created by: <span className="capitalize">{prompt.username}</span></p>
+                  <h2 className="font-bold text-xl mb-2 [color:var(--textColor)]">{prompt.title}</h2>
+                  <p className="[color:var(--textColor)] text-base mb-4">{prompt.description.substring(0, 100)}...</p>
+                  <p className="[color:var(--textColor)] font-semibold mb-2">Price: ₹{prompt.price}</p>
+                  <p className="[color:var(--textColor)]">Created by: <span className="capitalize">{prompt.username}</span></p>
                 </div>
                 <button 
                   onClick={() => handleBuyClick(username)} // Add onClick to handle the buy action
-                  className="prompt-buy-button text-gray-900 py-2 px-4 rounded-b-lg w-full text-center ">
+                  className="prompt-buy-button [color:var(--textColor)] py-2 px-4 rounded-b-lg w-full text-center ">
                   Buy Now
                 </button>
               </div>
             </Link>
           ))
         ) : (
-          <p className="text-center text-gray-600">No prompts available</p>
+          <p className="text-center [color:var(--textColor)]">No prompts available</p>
         )}
       </div>
     </>

@@ -65,7 +65,7 @@ const Signup = () => {
                   &nbsp;I accept the{" "}
                   <a
                     href="/terms"
-                    className="bg-gradient-to-r from-[rgb(214,133,134)]  to-[rgb(219,194,144)] text-transparent  bg-clip-text font-semibold"
+                    className="[background:var(--bg-gradient)] clipText font-semibold"
                     alt="Terms of Use"
                   >
                     Terms of Use
@@ -73,7 +73,7 @@ const Signup = () => {
                   &{" "}
                   <a
                     href="/privacy-policy"
-                    className="bg-gradient-to-r from-[rgb(214,133,134)]  to-[rgb(219,194,144)] text-transparent  bg-clip-text font-semibold"
+                    className="[background:var(--bg-gradient)] clipText font-semibold"
                     alt="Privacy Policy"
 
                   >
@@ -82,7 +82,7 @@ const Signup = () => {
                 </span>
               </div>
               <div className="mt-5">
-                <button className="w-full rounded-md bg-gradient-to-r from-[rgb(219,194,144)] to-[rgb(214,133,134)] text-slate-900 py-3 text-center">
+                <button className="w-full rounded-md button py-3 text-center">
                   Register Now 
                 </button>
               </div>

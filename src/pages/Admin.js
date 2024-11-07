@@ -38,19 +38,19 @@ const AdminPage = () => {
     <>
       <div className="container mx-auto px-4 py-8">
         <div className="pt-10 pl-20">
-          <h1 className="font-bold text-4xl">Admin Dashboard</h1>
+          <h1>Admin Dashboard</h1>
           <p className="text-xs  text-[rgb(161,161,169)] italic">Cue Ai dashboard</p>
         </div>
         <div className="mt-4 ml-20">
           <button
             onClick={() => navigate('/admin/approvePrompt')}
-            className="bg-gradient-to-r from-[rgb(219,194,144)] to-[rgb(214,133,134)] text-slate-900 py-2 px-4 rounded"
+            className="button py-2 px-4 rounded"
           >
             Approve Prompts
           </button>
           <button
             onClick={() => navigate('/admin/managePrompts')}
-            className="ml-5 bg-gradient-to-r from-[rgb(219,194,144)] to-[rgb(214,133,134)] text-slate-900 py-2 px-4 rounded"
+            className="ml-5 button py-2 px-4 rounded"
           >
             Manage Prompts
           </button>

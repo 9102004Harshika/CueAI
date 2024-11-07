@@ -54,7 +54,7 @@ const NewPassword = () => {
             />
           </div>
           <div className="mt-5">
-            <button type="submit" className="w-full rounded-md bg-gradient-to-r from-[rgb(219,194,144)] to-[rgb(214,133,134)] text-slate-900 py-3 text-center">
+            <button type="submit" className="w-full rounded-md button py-3 text-center">
               Reset Password
             </button>
           </div>

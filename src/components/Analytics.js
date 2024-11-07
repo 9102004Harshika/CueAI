@@ -88,7 +88,7 @@ const activityData = stats.userActivity.map(activity => ({
       <div className="flex gap-10">
         <div className="mt-5 w-[400px] h-[300px] bg-[rgb(57,57,84)] p-2 pt-5 rounded-lg">
         <h2 className='ml-3 text-2xl '>No of Active Users</h2>
-        <p className="text-sm text-gray-400 ml-3 mb-5">Proportion of active and inactive users.</p>
+        <p className="text-sm [color:var(--textColor)] ml-3 mb-5">Proportion of active and inactive users.</p>
           <ResponsiveContainer width="80%" height="75%">
             <PieChart
               width={60}
@@ -119,7 +119,7 @@ const activityData = stats.userActivity.map(activity => ({
         </div>
         <div className="mt-5 w-[400px] h-[300px] bg-[rgb(57,57,84)] p-2 pt-5 rounded-lg">
           <h2 className='ml-3 text-2xl '>Types of Users</h2>
-          <p className="text-sm text-gray-400 ml-3 mb-5">Types of users using the site.</p>
+          <p className="text-sm [color:var(--textColor)] ml-3 mb-5">Types of users using the site.</p>
           <ResponsiveContainer width="85%" height="75%">
             <BarChart data={userData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
               <XAxis dataKey="name" />
@@ -134,7 +134,7 @@ const activityData = stats.userActivity.map(activity => ({
         </div>
          <div className="mt-5 w-[400px] h-[300px] bg-[rgb(57,57,84)] p-2 pt-3 rounded-lg">
         <h2 className='ml-3 text-2xl '>Retention Rate</h2>
-        <p className="text-sm text-gray-400 text-center mb-5">Retention rate is the number of users returning back to the site.</p>
+        <p className="text-sm [color:var(--textColor)] text-center mb-5">Retention rate is the number of users returning back to the site.</p>
         <ResponsiveContainer width="85%" height="75%">
           <LineChart data={retentionData}>
             <XAxis dataKey="name" />
@@ -150,7 +150,7 @@ const activityData = stats.userActivity.map(activity => ({
      <div className='flex gap-10'> 
      <div className="mt-5 w-[400px] h-[300px] bg-[rgb(57,57,84)] p-2 pt-3 rounded-lg">
          <h2 className='ml-3 text-2xl '>Geographical distribution</h2>
-        <p className="text-sm text-gray-400 ml-3  ">Percentage of users from different locations.</p>
+        <p className="text-sm [color:var(--textColor)] ml-3  ">Percentage of users from different locations.</p>
         <ResponsiveContainer width="85%" height="85%">
           <PieChart
           >
@@ -167,7 +167,7 @@ const activityData = stats.userActivity.map(activity => ({
      
       <div className="mt-5 w-[400px] h-[300px] bg-[rgb(57,57,84)] p-2 pt-3 rounded-lg">
       <h2 className='ml-3 text-2xl '>Types of Devices</h2>
-      <p className="text-sm text-gray-400 ml-3 mb-5">Percentage of users using site from different devices.</p>
+      <p className="text-sm [color:var(--textColor)] ml-3 mb-5">Percentage of users using site from different devices.</p>
         <ResponsiveContainer width="85%" height="75%">
           <BarChart data={deviceData()}>
             <XAxis dataKey="name" />
@@ -184,7 +184,7 @@ const activityData = stats.userActivity.map(activity => ({
       </div>
       <div className="mt-5 w-[400px] h-[300px] bg-[rgb(57,57,84)] p-2 pt-3 rounded-lg">
       <h2 className='ml-3 text-2xl '>User Activity Over Time</h2>
-      <p className="text-sm text-gray-400 ml-3 mb-5">User activity metrics with respect to days of week.</p>
+      <p className="text-sm [color:var(--textColor)] ml-3 mb-5">User activity metrics with respect to days of week.</p>
         <ResponsiveContainer width="85%" height="75%">
           <BarChart data={activityData}>
           <XAxis dataKey="dayOfWeek" />
@@ -270,7 +270,7 @@ export const PromptsAnalytics = () => {
         {/* Existing Charts */}
         <div className="mt-5 w-[400px] h-[300px] bg-[rgb(57,57,84)] p-2 pt-3 rounded-lg">
           <h2 className='ml-3 text-2xl'>Prompt Approval Rate</h2>
-          <p className="text-sm text-gray-400 ml-3 mb-5">Approval, rejection, and pending status of prompts.</p>
+          <p className="text-sm [color:var(--textColor)] ml-3 mb-5">Approval, rejection, and pending status of prompts.</p>
           <ResponsiveContainer width="85%" height="75%">
             <PieChart>
               <Pie data={promptStatusData} outerRadius={70} fill="#8884d8" label>
@@ -286,7 +286,7 @@ export const PromptsAnalytics = () => {
 
         <div className="mt-5 w-[400px] h-[300px] bg-[rgb(57,57,84)] p-2 pt-5 rounded-lg">
           <h2 className='ml-3 text-2xl'>Category Distribution</h2>
-          <p className="text-sm text-gray-400 ml-3 mb-5">Distribution of prompts across different categories.</p>
+          <p className="text-sm [color:var(--textColor)] ml-3 mb-5">Distribution of prompts across different categories.</p>
           <ResponsiveContainer width="85%" height="75%">
             <PieChart>
               <Pie data={categoryData} outerRadius={70} fill="#82ca9d" label>
@@ -302,7 +302,7 @@ export const PromptsAnalytics = () => {
 
         <div className="mt-5 w-[400px] h-[300px] bg-[rgb(57,57,84)] p-2 pt-3 rounded-lg">
           <h2 className='ml-3 text-2xl'>Monthly Prompts</h2>
-          <p className="text-sm text-gray-400 ml-3 mb-5">Number of prompts created each month.</p>
+          <p className="text-sm [color:var(--textColor)] ml-3 mb-5">Number of prompts created each month.</p>
           <ResponsiveContainer width="85%" height="75%">
             <LineChart data={monthlyData}>
               <XAxis dataKey="name" />
@@ -319,7 +319,7 @@ export const PromptsAnalytics = () => {
         {/* New Charts */}
         <div className="mt-5 w-[400px] h-[300px] bg-[rgb(57,57,84)] p-2 pt-3 rounded-lg">
           <h2 className='ml-3 text-2xl'>Device Usage</h2>
-          <p className="text-sm text-gray-400 ml-3 mb-5">Distribution of prompts by device or model.</p>
+          <p className="text-sm [color:var(--textColor)] ml-3 mb-5">Distribution of prompts by device or model.</p>
           <ResponsiveContainer width="85%" height="75%">
             <PieChart>
               <Pie data={deviceUsageData} outerRadius={70} fill="#ff7300" label>
@@ -335,7 +335,7 @@ export const PromptsAnalytics = () => {
 
         <div className="mt-5 w-[400px] h-[300px] bg-[rgb(57,57,84)] p-2 pt-3 rounded-lg">
           <h2 className='ml-3 text-2xl'>Conversion Funnel</h2>
-          <p className="text-sm text-gray-400 ml-3 mb-5">Stages of prompt submission, review, and approval.</p>
+          <p className="text-sm [color:var(--textColor)] ml-3 mb-5">Stages of prompt submission, review, and approval.</p>
           <ResponsiveContainer width="85%" height="75%">
             <BarChart data={conversionFunnelData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -350,7 +350,7 @@ export const PromptsAnalytics = () => {
 
         <div className="mt-5 w-[400px] h-[300px] bg-[rgb(57,57,84)] p-2 pt-3 rounded-lg">
           <h2 className='ml-3 text-2xl'>User Activity Heatmap</h2>
-          <p className="text-sm text-gray-400 ml-3 mb-5">Activity levels of prompt creation or updates over time.</p>
+          <p className="text-sm [color:var(--textColor)] ml-3 mb-5">Activity levels of prompt creation or updates over time.</p>
           <ResponsiveContainer width="85%" height="75%">
             <LineChart data={userActivityData}>
               <XAxis dataKey="date" />

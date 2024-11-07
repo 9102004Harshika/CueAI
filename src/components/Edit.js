@@ -99,7 +99,7 @@ const Edit = () => {
   return (
     <>
       <div className="pt-10 pl-20">
-        <h1 className="font-bold text-4xl">Edit Prompt.</h1>
+        <h1>Edit Prompt.</h1>
         <p className="text-xs text-[rgb(161,161,169)] italic">
           Want to make changes in prompt
         </p>
@@ -224,7 +224,7 @@ const Edit = () => {
               </div>
             </div>
             <button
-              className="bg-gradient-to-r from-[rgb(219,194,144)] to-[rgb(214,133,134)] text-slate-900 mt-4 rounded-md  p-2"
+              className="button mt-4 rounded-md  p-2"
               type="button"
               onClick={handleSaveClick}
             >
