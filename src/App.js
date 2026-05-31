@@ -1,7 +1,10 @@
 import { lazy } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion';
+
 const Home = lazy(() => import('./pages/Home'));
+const CreatorLogin = lazy(() => import('./pages/CreatorLogin'));
+const CreatorSignup = lazy(() => import('./pages/CreatorSignup'))
 const CreatorFeed = lazy(() => import('./pages/CreatorFeed'));
 const CreatorProfile = lazy(() => import('./pages/CreatorProfile'));
 const Login = lazy(() => import('./pages/Login'))
@@ -36,6 +39,8 @@ const AppRoutes = () => {
         <Route path='/marketplace' element={<Marketplace />} />
         <Route path='/marketplace/prompt/:id' element={<NewPromptDetail />} />
         <Route path='/playground' element={<Playground />} />
+        <Route path="/creator-login" element={<CreatorLogin />} />
+        <Route path="/creator-signup" element={<CreatorSignup />} />
         <Route path='/feed' element={<CreatorFeed />} />
         <Route path='/creator' element={<CreatorProfile />} />
         <Route path='/login' element={<Login />} />

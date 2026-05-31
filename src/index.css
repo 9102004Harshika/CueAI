@@ -6,10 +6,12 @@
 @tailwind utilities;
 
 @layer base {
-  body {
+  html, body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
+
   .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   }
@@ -17,54 +19,73 @@
 
 @layer utilities {
   .glass-card {
-      background: rgba(22, 22, 30, 0.6);
-      backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(22, 22, 30, 0.6);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
+
   .primary-glow {
-      box-shadow: 0 0 20px rgba(208, 188, 255, 0.25);
+    box-shadow: 0 0 20px rgba(208, 188, 255, 0.25);
   }
+
   .hero-gradient {
-      background: radial-gradient(circle at 50% 50%, rgba(208, 188, 255, 0.15) 0%, rgba(76, 215, 246, 0.1) 50%, transparent 100%);
+    background: radial-gradient(circle at 50% 50%, rgba(208, 188, 255, 0.15) 0%, rgba(76, 215, 246, 0.1) 50%, transparent 100%);
   }
+
   .noise-overlay {
-      background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
-      opacity: 0.03;
-      pointer-events: none;
+    background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
+    opacity: 0.03;
+    pointer-events: none;
   }
+
   .no-scrollbar::-webkit-scrollbar {
-      display: none;
+    display: none;
   }
+
   .no-scrollbar {
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
   }
 }
 
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #353439; border-radius: 10px; }
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #353439;
+  border-radius: 10px;
+}
 
 :root {
   --bg-gradient: linear-gradient(to right, rgb(219, 194, 144), rgb(214, 133, 134));
-  --textColor: #0f172a; 
+  --textColor: #0f172a;
   --text-gradient: linear-gradient(to right, rgb(214, 133, 134), rgb(153, 204, 153), rgb(108, 127, 188));
 }
 
-.button{
+
+
+.button {
   background-color: var(--bg-gradient);
   color: var(--textColor);
 }
-.clipText{
+
+.clipText {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-::selection{
-  background-color:rgb(219,194,144);
-  color :black;
+::selection {
+  background-color: rgb(219, 194, 144);
+  color: black;
 }
 
 /* BuyPrompt Component CSS */
@@ -84,11 +105,11 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 250px; 
-  width: 350px; 
+  height: 250px;
+  width: 350px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
+  justify-content: space-between;
 }
 
 .prompts-card {
@@ -97,11 +118,11 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 200px; 
-  width: 300px; 
+  height: 200px;
+  width: 300px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
+  justify-content: space-between;
 }
 
 .prompt-card:hover {
@@ -111,7 +132,7 @@
 
 .prompt-card-content {
   padding: 15px;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .prompt-title {
