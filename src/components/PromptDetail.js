@@ -6,6 +6,9 @@ import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import axios from "axios";
 import logo from '../assets/logo.png';
+import AnimatedButton from '../components/AnimatedButton';
+import { motion } from 'framer-motion';
+import { itemVariant } from '../animations/variants';
 
 const PromptDetail = () => {
   const { id } = useParams();
@@ -157,15 +160,13 @@ const PromptDetail = () => {
             <span className="text-5xl">{prompt.price}</span>
           </h1>
           <div className="pt-5 flex">
-            <button className="getPrompt p-3 [color:var(--textColor)] rounded-md text-xl" onClick={handleGetPromptClick}>
+            <AnimatedButton onClick={handleGetPromptClick} className="getPrompt p-3 [color:var(--textColor)] rounded-md text-xl">
               Get Prompt
-            </button>
+            </AnimatedButton>
             <div className="flex justify-center">
-              <button
-                onClick={handleCartClick}
-                className="ml-5 rounded-md text-4xl w-[100px] align-center place-items-center">
+              <AnimatedButton onClick={handleCartClick} className="ml-5 rounded-md text-4xl w-[100px] align-center place-items-center">
                 <MdOutlineAddShoppingCart />
-              </button>
+              </AnimatedButton>
             </div>
           </div>
           <p className="pt-5 text-[rgb(136,136,147)] text-xs italic ">

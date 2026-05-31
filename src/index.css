@@ -1,23 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist:wght@600;700&family=JetBrains+Mono:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body {
-  font-family: "Roboto Condensed", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background:#222236;
- color:white
+
+@layer base {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
 }
+
+@layer utilities {
+  .glass-card {
+      background: rgba(22, 22, 30, 0.6);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .primary-glow {
+      box-shadow: 0 0 20px rgba(208, 188, 255, 0.25);
+  }
+  .hero-gradient {
+      background: radial-gradient(circle at 50% 50%, rgba(208, 188, 255, 0.15) 0%, rgba(76, 215, 246, 0.1) 50%, transparent 100%);
+  }
+  .noise-overlay {
+      background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
+      opacity: 0.03;
+      pointer-events: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
+  .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+  }
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #353439; border-radius: 10px; }
+
 :root {
   --bg-gradient: linear-gradient(to right, rgb(219, 194, 144), rgb(214, 133, 134));
   --textColor: #0f172a; 
   --text-gradient: linear-gradient(to right, rgb(214, 133, 134), rgb(153, 204, 153), rgb(108, 127, 188));
 }
-h1{
-  font-weight: bold;
-  font-size: 2.25rem;
-  line-height: 2.5rem; 
-}
+
 .button{
   background-color: var(--bg-gradient);
   color: var(--textColor);
@@ -31,10 +65,9 @@ h1{
 ::selection{
   background-color:rgb(219,194,144);
   color :black;
-  
 }
-/* BuyPrompt Component CSS */
 
+/* BuyPrompt Component CSS */
 .prompt-container {
   display: grid;
   grid-template-columns: repeat(3, 350px);
@@ -51,23 +84,24 @@ h1{
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 250px; /* Set a fixed height */
-  width: 350px; /* Set a fixed width */
+  height: 250px; 
+  width: 350px; 
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Ensures button is always at the bottom */
+  justify-content: space-between; 
 }
+
 .prompts-card {
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 200px; /* Set a fixed height */
-  width: 300px; /* Set a fixed width */
+  height: 200px; 
+  width: 300px; 
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Ensures button is always at the bottom */
+  justify-content: space-between; 
 }
 
 .prompt-card:hover {
@@ -77,7 +111,7 @@ h1{
 
 .prompt-card-content {
   padding: 15px;
-  overflow: hidden; /* Ensure text does not overflow */
+  overflow: hidden; 
 }
 
 .prompt-title {
@@ -116,11 +150,12 @@ h1{
   text-align: center;
   cursor: pointer;
 }
+
 .prompts-buy-button {
   background: var(--bg-gradient);
   padding: 2px;
   border: none;
-  border-radius: 10px 10px 10px 10px;
+  border-radius: 10px;
   width: 100%;
   text-align: center;
   cursor: pointer;
@@ -131,8 +166,7 @@ h1{
 .getPrompt:hover {
   background: linear-gradient(90deg, #d68586, #dbca90);
 }
-.getPrompt{
+
+.getPrompt {
   background: var(--bg-gradient);
 }
-
-
