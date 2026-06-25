@@ -224,13 +224,7 @@ export const PromptsAnalytics = () => {
     fetchData();
   }, []);
 
-  // Data for PieChart
-  const aggregateData = () => {
-    return [
-      { name: 'Inactive Prompts', value: stats.totalPrompts - stats.activePrompts },
-      { name: 'Active Prompts', value: stats.activePrompts },
-    ];
-  };
+
 
   const categoryData = stats.categoryDistribution.map((entry, index) => ({
     name: entry.category,

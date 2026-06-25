@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist:wght@600;700&family=JetBrains+Mono:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
 @tailwind base;
@@ -10,49 +10,84 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    background-color: #09090b; /* zinc-950 */
+    color: #fafafa;
+    scroll-behavior: smooth;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Geist', sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  code, pre {
+    font-family: 'JetBrains Mono', monospace;
   }
 
   .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   }
+
+  ::selection {
+    background-color: rgba(37, 99, 235, 0.3); /* blue-600 */
+    color: #ffffff;
+  }
 }
 
 @layer utilities {
-  .glass-card {
-    background: rgba(22, 22, 30, 0.6);
-    backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  .premium-card {
+    background-color: #18181b; /* zinc-900 */
+    border: 1px solid #27272a; /* zinc-800 */
+    border-radius: 0.75rem;
+    transition: all 0.2s ease-out;
   }
 
-  .primary-glow {
-    box-shadow: 0 0 20px rgba(208, 188, 255, 0.25);
+  .premium-card:hover {
+    border-color: #3f3f46; /* zinc-700 */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   }
 
-  .hero-gradient {
-    background: radial-gradient(circle at 50% 50%, rgba(208, 188, 255, 0.15) 0%, rgba(76, 215, 246, 0.1) 50%, transparent 100%);
+  .surface-panel {
+    background-color: #09090b; /* zinc-950 */
+    border: 1px solid #27272a;
   }
 
-  .noise-overlay {
-    background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
-    opacity: 0.03;
-    pointer-events: none;
+  .btn-primary {
+    background-color: #fafafa;
+    color: #18181b;
+    font-weight: 600;
+    transition: all 0.2s ease;
   }
 
-  .no-scrollbar::-webkit-scrollbar {
+  .btn-primary:hover {
+    background-color: #e4e4e7; /* zinc-200 */
+  }
+
+  .btn-secondary {
+    background-color: #18181b;
+    color: #fafafa;
+    border: 1px solid #3f3f46;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .btn-secondary:hover {
+    background-color: #27272a;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }
 
-  .no-scrollbar {
+  .hide-scrollbar {
     -ms-overflow-style: none;
-    /* IE and Edge */
     scrollbar-width: none;
-    /* Firefox */
   }
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -60,134 +95,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #353439;
-  border-radius: 10px;
+  background: #27272a; /* zinc-800 */
+  border-radius: 4px;
 }
 
-:root {
-  --bg-gradient: linear-gradient(to right, rgb(219, 194, 144), rgb(214, 133, 134));
-  --textColor: #0f172a;
-  --text-gradient: linear-gradient(to right, rgb(214, 133, 134), rgb(153, 204, 153), rgb(108, 127, 188));
-}
-
-
-
-.button {
-  background-color: var(--bg-gradient);
-  color: var(--textColor);
-}
-
-.clipText {
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-::selection {
-  background-color: rgb(219, 194, 144);
-  color: black;
-}
-
-/* BuyPrompt Component CSS */
-.prompt-container {
-  display: grid;
-  grid-template-columns: repeat(3, 350px);
-  gap: 20px;
-}
-
-.prompt-card-link {
-  text-decoration: none;
-}
-
-.prompt-card {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 250px;
-  width: 350px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.prompts-card {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 200px;
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.prompt-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.prompt-card-content {
-  padding: 15px;
-  overflow: hidden;
-}
-
-.prompt-title {
-  font-size: 0.5em;
-  color: #333;
-  margin-bottom: 10px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.prompt-description {
-  color: #666;
-  margin-bottom: 15px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.prompt-price {
-  color: #e74c3c;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.prompt-username {
-  color: #555;
-}
-
-.prompt-buy-button {
-  background: var(--bg-gradient);
-  padding: 10px;
-  border: none;
-  border-radius: 0 0 10px 10px;
-  width: 100%;
-  text-align: center;
-  cursor: pointer;
-}
-
-.prompts-buy-button {
-  background: var(--bg-gradient);
-  padding: 2px;
-  border: none;
-  border-radius: 10px;
-  width: 100%;
-  text-align: center;
-  cursor: pointer;
-  margin-left: 2px;
-}
-
-.prompt-buy-button:hover,
-.getPrompt:hover {
-  background: linear-gradient(90deg, #d68586, #dbca90);
-}
-
-.getPrompt {
-  background: var(--bg-gradient);
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46; /* zinc-700 */
 }

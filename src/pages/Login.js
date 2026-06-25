@@ -1,282 +1,125 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import axios from 'axios';
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { setAuthToken } from '../utility/authToken';
 const Login = () => {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [otp, setOtp] = useState('');
-  const [otpSent, setOtpSent] = useState(false); // Track if OTP has been sent
-  const [loading, setLoading] = useState(false); // To handle loading states 
-  // Step 1: Send OTP to user's email
-  const handleEmailSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const response = await axios.post('http://localhost:5000/send-otp-for-login', { email });
-      if (response.status === 200) {
-        alert('OTP sent to your email');
-        setOtpSent(true); // Show OTP input form
-      } else {
-        alert('Failed to send OTP');
-      }
-    } catch (err) {
-      console.error('OTP request error:', err);
-      alert('Error sending OTP');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Step 2: Verify OTP and login
-  const handleOtpSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const response = await axios.post('http://localhost:5000/verify-otp-and-login', { email, otp });
-      if (response.status === 200) {
-        alert('Logged In Successfully!!!');
-        const { user, token } = response.data;
-        setAuthToken(user.fname, token);;
-        // Use the user information to navigate
-        if (user.accountType === 'admin') {
-          navigate('/admin');
-        } else {
-          navigate(`/${user.fname}`);
-        }
-      } else {
-        alert('Invalid OTP');
-      }
-    } catch (err) {
-      console.error('Login error:', err);
-      alert('Login failed');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
-    <>
-      <meta charSet="utf-8" />
-      <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-      <title>Login | Cue AI</title>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist:wght@600;700&family=JetBrains+Mono:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap"
-        rel="stylesheet"
-      />
-      <style
-        dangerouslySetInnerHTML={{
-          __html:
-            "\n        .glass-card {\n            background: rgba(22, 22, 30, 0.6);\n            backdrop-filter: blur(24px);\n            border: 1px solid rgba(255, 255, 255, 0.08);\n            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);\n        }\n        .glow-border:focus-within {\n            border-color: #d0bcff;\n            box-shadow: 0 0 15px rgba(208, 188, 255, 0.2);\n        }\n        .primary-glow:hover {\n            box-shadow: 0 0 20px rgba(208, 188, 255, 0.25);\n        }\n        .bg-mesh {\n            background-color: #0B0B0F;\n            background-image: \n                radial-gradient(at 0% 0%, rgba(60, 0, 145, 0.15) 0px, transparent 50%),\n                radial-gradient(at 100% 0%, rgba(3, 181, 211, 0.1) 0px, transparent 50%);\n        }\n        .material-symbols-outlined {\n            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;\n        }\n    "
-        }}
-      />
-      {/* Navigation suppressed for transactional page */}
-      <main className="flex-grow min-h-screen bg-background flex items-center justify-center px-margin-mobile md:px-margin-desktop py-stack-xl relative">
-        {/* Decorative Ambient Element */}
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-secondary/5 blur-[120px] rounded-full pointer-events-none" />
-        <div className="w-full max-w-[440px] z-10">
-          {/* Brand Identity */}
-          <div className="flex flex-col items-center mb-stack-md">
-            <div className="w-12 h-12 bg-primary-container rounded-xl flex items-center justify-center mb-stack-sm shadow-lg shadow-primary/20">
-              <span
-                className="material-symbols-outlined text-on-primary-container text-3xl"
-                data-icon="electric_bolt"
-              >
-                electric_bolt
-              </span>
-            </div>
-            <h1 className="font-headline-md text-headline-md tracking-tighter text-on-surface">
-              Cue AI
-            </h1>
-            <p className="font-body-md text-body-md text-on-surface-variant mt-1">
-              Enter the creator ecosystem
-            </p>
-          </div>
-          {/* Login Card */}
-          <div className="glass-card rounded-xl p-stack-md md:p-stack-lg">
-            {!otpSent ? (
-            <form onSubmit={handleEmailSubmit} className="space-y-stack-md">
-              {/* Email Field */}
-              <div className="space-y-stack-xs">
-                <label
-                  className="font-label-md text-label-md text-on-surface-variant ml-1"
-                  htmlFor="email"
-                >
-                  Email Address
-                </label>
-                <div className="relative group">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <span
-                      className="material-symbols-outlined text-outline text-lg"
-                      data-icon="mail"
-                    >
-                      mail
-                    </span>
-                  </div>
-                  <input
-                    className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg py-3 pl-10 pr-4 font-label-caps placeholder:text-outline focus:outline-none glow-border transition-all duration-300"
-                    id="email"
-                    name="email"
-                    placeholder="name@domain.com"
-                    required
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-              </div>
-              
-              {/* Send OTP Button */}
-              <button
-                className="w-full py-3.5 px-6 bg-gradient-to-r from-primary-container to-primary rounded-lg font-body-lg text-body-lg font-bold text-on-primary-container primary-glow transition-all duration-300 active:scale-[0.98]"
-                type="submit"
-                disabled={loading}
-              >
-                {loading ? 'Sending...' : 'Send OTP'}
-              </button>
-            </form>
-            ) : (
-            <form onSubmit={handleOtpSubmit} className="space-y-stack-md">
-              {/* Email Field (Disabled) */}
-              <div className="space-y-stack-xs">
-                <label
-                  className="font-label-md text-label-md text-on-surface-variant ml-1"
-                  htmlFor="email"
-                >
-                  Email Address
-                </label>
-                <div className="relative group">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <span
-                      className="material-symbols-outlined text-outline text-lg"
-                      data-icon="mail"
-                    >
-                      mail
-                    </span>
-                  </div>
-                  <input
-                    className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg py-3 pl-10 pr-4 font-label-caps placeholder:text-outline focus:outline-none glow-border transition-all duration-300 opacity-50 cursor-not-allowed"
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={email}
-                    disabled
-                  />
-                </div>
-              </div>
-              {/* Password Field */}
-              <div className="space-y-stack-xs">
-                <div className="flex justify-between items-center ml-1">
-                  <label
-                    className="font-label-md text-label-md text-on-surface-variant"
-                    htmlFor="password"
-                  >
-                    One Time Password (OTP)
-                  </label>
-                </div>
-                <div className="relative group">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <span
-                      className="material-symbols-outlined text-outline text-lg"
-                      data-icon="lock"
-                    >
-                      lock
-                    </span>
-                  </div>
-                  <input
-                    className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg py-3 pl-10 pr-10 font-label-caps placeholder:text-outline focus:outline-none glow-border transition-all duration-300"
-                    id="password"
-                    name="password"
-                    placeholder="••••••••"
-                    required
-                    type="password"
-                    value={otp}
-                    onChange={(e) => setOtp(e.target.value)}
-                  />
-                </div>
-              </div>
-              {/* Login Button */}
-              <button
-                className="w-full py-3.5 px-6 bg-gradient-to-r from-primary-container to-primary rounded-lg font-body-lg text-body-lg font-bold text-on-primary-container primary-glow transition-all duration-300 active:scale-[0.98]"
-                type="submit"
-                disabled={loading}
-              >
-                {loading ? 'Verifying...' : 'Login'}
-              </button>
-            </form>
-            )}
-              {/* Divider */}
-              <div className="relative py-4">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-outline-variant/20" />
-                </div>
-                <div className="relative flex justify-center text-label-caps uppercase">
-                  <span className="bg-transparent px-4 text-outline text-[10px] tracking-widest">
-                    Or continue with
-                  </span>
-                </div>
-              </div>
-              {/* Social Options */}
-              <div className="grid grid-cols-2 gap-stack-sm">
-                <button
-                  className="flex items-center justify-center gap-2 py-2.5 border border-outline-variant/30 rounded-lg hover:bg-white/5 transition-colors duration-300"
-                  type="button"
-                >
-                  <img
-                    alt="Google"
-                    className="w-5 h-5"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRLpkAw2N_-dDHX8SaAOJUky79WYLdok8em9-kEIkOrSUP0bDTha3eMnXXwp2RWpArbIYFgbgeAhwdVUZO3ycCApdwwBP9cG_F_ChZQ_hLkzN8O3bK8P1HCQY6-jNBuK1GaEe0aze-_iQUuDrZ6t7xmLk1rqmxLPjvCWnpKkjWQByjMSma_QBx0Bxbv475IlQ2bdREZCtj77fx779zW8FAltpCdcNfS_cIggiYsgtVJi5WuznmYXicNH6BW5zExISvF0D4nFG9iRc"
-                  />
-                  <span className="font-label-md text-label-md text-on-surface">
-                    Google
-                  </span>
-                </button>
-                <button
-                  className="flex items-center justify-center gap-2 py-2.5 border border-outline-variant/30 rounded-lg hover:bg-white/5 transition-colors duration-300"
-                  type="button"
-                >
-                  <svg className="w-5 h-5 fill-on-surface" viewBox="0 0 24 24">
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.11.81 2.235 0 1.605-.015 2.895-.015 3.285 0 .315.225.69.825.57C20.565 21.795 24 17.31 24 12c0-6.63-5.37-12-12-12z" />
-                  </svg>
-                  <span className="font-label-md text-label-md text-on-surface">
-                    GitHub
-                  </span>
-                </button>
-              </div>
-            {/* Signup Link */}
-            <div className="mt-stack-lg text-center">
-              <p className="font-body-md text-body-md text-on-surface-variant">
-                Don't have an account?
-                <a
-                  className="text-primary font-bold hover:underline decoration-primary/30 underline-offset-4"
-                  href="#"
-                >
-                  Sign up
-                </a>
-              </p>
-            </div>
-          </div>
-          {/* Global Footer Element */}
-          <div className="mt-stack-xl text-center">
-            <p className="font-label-caps text-label-caps text-outline/60">
-              © 2024 Cue AI. Precision Prompting.
-            </p>
-          </div>
+    <div className="min-h-screen bg-background flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-body">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="flex justify-center mb-6">
+          <Link to="/" className="text-2xl font-display font-semibold tracking-tight text-on-background">CueAI</Link>
         </div>
-      </main>
-      {/* Simple Atmospheric Scripts */}
-    </>
+        <h2 className="text-center text-3xl font-display font-bold text-on-background mb-2">
+          Welcome back
+        </h2>
+        <p className="text-center text-sm text-on-surface-variant">
+          Log in to your account to continue
+        </p>
+      </div>
 
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="premium-card py-8 px-4 shadow-elevated sm:rounded-lg sm:px-10">
+          <form className="space-y-6" action="#" method="POST">
+            <div>
+              <label htmlFor="email" className="block text-sm font-semibold text-on-surface-variant mb-1">
+                Email address
+              </label>
+              <div className="mt-1">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  className="appearance-none block w-full px-3 py-2 border border-outline-variant bg-surface rounded-md shadow-sm text-on-background focus:outline-none focus:ring-primary focus:border-primary sm:text-sm transition-colors"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="password" className="block text-sm font-semibold text-on-surface-variant mb-1">
+                Password
+              </label>
+              <div className="mt-1">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  className="appearance-none block w-full px-3 py-2 border border-outline-variant bg-surface rounded-md shadow-sm text-on-background focus:outline-none focus:ring-primary focus:border-primary sm:text-sm transition-colors"
+                />
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <input
+                  id="remember-me"
+                  name="remember-me"
+                  type="checkbox"
+                  className="h-4 w-4 text-primary bg-surface border-outline-variant rounded focus:ring-primary"
+                />
+                <label htmlFor="remember-me" className="ml-2 block text-sm text-on-surface-variant">
+                  Remember me
+                </label>
+              </div>
+
+              <div className="text-sm">
+                <Link to="/forgotPassword" className="font-semibold text-primary hover:text-blue-500">
+                  Forgot your password?
+                </Link>
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-semibold text-background bg-on-background hover:bg-secondary transition-colors"
+              >
+                Sign in
+              </button>
+            </div>
+          </form>
+
+          <div className="mt-6">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-outline-variant" />
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-surface text-on-surface-variant">Or continue with</span>
+              </div>
+            </div>
+
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              <div>
+                <a href="#" className="w-full inline-flex justify-center py-2 px-4 border border-outline-variant rounded-md shadow-sm bg-surface text-sm font-medium text-on-surface-variant hover:bg-surface-variant transition-colors">
+                  <span className="sr-only">Sign in with Google</span>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" />
+                  </svg>
+                </a>
+              </div>
+              <div>
+                <a href="#" className="w-full inline-flex justify-center py-2 px-4 border border-outline-variant rounded-md shadow-sm bg-surface text-sm font-medium text-on-surface-variant hover:bg-surface-variant transition-colors">
+                  <span className="sr-only">Sign in with GitHub</span>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                    <path fillRule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clipRule="evenodd" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <p className="mt-8 text-center text-sm text-on-surface-variant">
+            Don't have an account?{' '}
+            <Link to="/signup" className="font-semibold text-primary hover:text-blue-500">
+              Sign up
+            </Link>
+          </p>
+        </div>
+      </div>
+    </div>
   );
 };
 

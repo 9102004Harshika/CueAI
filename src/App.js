@@ -29,7 +29,15 @@ const Orders = lazy(() => import('./pages/Orders'))
 const TermsAndConditions = lazy(() => import('./pages/TermsAndConditions'))
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const FAQ = lazy(() => import("./pages/Faq"));
-const Marketplace = lazy(() => import("./pages/Marketplace"))
+const Marketplace = lazy(() => import("./pages/Marketplace"));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const CreatorOnboardingStep2 = lazy(() => import('./pages/CreatorOnboardingStep2'));
+const CreatorOnboardingFinal = lazy(() => import('./pages/CreatorOnboardingFinal'));
+const ApiKeys = lazy(() => import('./pages/ApiKeys'));
+const ApiDocs = lazy(() => import('./pages/ApiDocs'));
+const Organizations = lazy(() => import('./pages/Organizations'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
+const Pricing = lazy(() => import('./pages/Pricing'));
 const AppRoutes = () => {
   const location = useLocation();
   return (
@@ -37,6 +45,15 @@ const AppRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path='/' element={<Home />} />
         <Route path='/marketplace' element={<Marketplace />} />
+        <Route path='/marketplace' element={<Marketplace />} />
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/organizations' element={<Organizations />} />
+        <Route path='/admin-dashboard' element={<AdminDashboard />} />
+        <Route path='/pricing' element={<Pricing />} />
+        <Route path='/api-keys' element={<ApiKeys />} />
+        <Route path='/docs' element={<ApiDocs />} />
+        <Route path="/creator-signup/step-2" element={<CreatorOnboardingStep2 />} />
+        <Route path="/creator-signup/final" element={<CreatorOnboardingFinal />} />
         <Route path='/marketplace/prompt/:id' element={<NewPromptDetail />} />
         <Route path='/playground' element={<Playground />} />
         <Route path="/creator-login" element={<CreatorLogin />} />
@@ -49,9 +66,9 @@ const AppRoutes = () => {
         <Route path='/resetPassword' element={<NewPassword />} />
         <Route path='/:username' element={<Profile />} />
         <Route path='/:username/prompt' element={<Prompt />} />
-        <Route path='/prompt/:id' element={<PromptDetail />} />
+        <Route path='/prompt/:id' element={<NewPromptDetail />} />
         <Route path='/editprompt/:promptId' element={<Edit />} />
-        <Route path='/:username/profile' element={<UserProfile />} />
+        <Route path='/:username/profile' element={<Profile />} />
         <Route path='/admin' element={<AdminPage />} />
         <Route path='/admin/approvePrompt' element={<ApprovePrompt />} />
         <Route path='/admin/managePrompts' element={<ManagePrompts />} />

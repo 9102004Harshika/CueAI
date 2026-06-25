@@ -1,237 +1,121 @@
-
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from 'axios';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
-  const navigate = useNavigate();
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
-  const [email, setEmail] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios.post('http://localhost:5000/signup', { fname, lname, email })
-      .then(result => {
-        alert("Created account successfully");
-        const joinedDate = result.data.joinedDate;
-        localStorage.setItem('joinedDate', new Date(joinedDate).toString());
-        navigate('/login');
-      })
-      .catch(err => console.log(err));
-  }
-
   return (
-    <>
-      <meta charSet="utf-8" />
-      <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Geist:wght@600;700&family=JetBrains+Mono:wght@500&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet"
-      />
-      <style
-        dangerouslySetInnerHTML={{
-          __html:
-            "\n        .material-symbols-outlined {\n            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;\n        }\n        .glass-panel {\n            background: rgba(22, 22, 30, 0.6);\n            backdrop-filter: blur(24px);\n            border: 1px solid rgba(255, 255, 255, 0.08);\n            border-top: 1px solid rgba(255, 255, 255, 0.15);\n        }\n        .primary-glow {\n            box-shadow: 0 0 20px rgba(208, 188, 255, 0.25);\n        }\n        .input-glow:focus-within {\n            box-shadow: 0 0 0 1px rgba(208, 188, 255, 0.5);\n        }\n        body {\n            background-color: #0B0B0F;\n            color: #e4e1e7;\n            overflow-x: hidden;\n        }\n    "
-        }}
-      />
-      <div className="flex min-h-screen w-full">
-        {/* Left Column: Immersive 3D Visual */}
-        <aside className="hidden md:flex relative w-1/2 h-screen overflow-hidden bg-surface-container-lowest">
-        <div className="absolute inset-0 z-0">
-          <img
-            alt="High-fidelity abstract 3D visual"
-            className="w-full h-full object-cover opacity-60 mix-blend-screen"
-            data-alt="A sophisticated 3D abstract digital sculpture featuring flowing, fluid metallic ribbons in deep violet and neon cyan. The structure is suspended in a dark, infinite void with cinematic volumetric lighting hitting the edges, creating a high-fidelity glassmorphic effect. The scene reflects a futuristic AI aesthetic with sharp technical precision and a deep sense of verticality. Soft atmospheric glows and particle clusters add layers of depth and motion to the minimalist composition."
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwVj-UFnwmbEpJ75pPhOIieuPrdc2Rp0Stq70HmFdLlHv-2BSf8zt3vBzQ6igcnVhmnY3DWqK2sBdCNdQQ7BknSnbjySkYdhESw7Tmnb854gj3R4tseAmp8w4aAaBKbMaCIVP3c-QSQV_OXlwbMOxspWa_l6oBI3R1TnWUCaq2bwG4Uarc-eS1d_2-NXlzIE1t2ybbAVxuoachxp8_0iwssC6TkjkXk2DQhmL3ZI0y7T3KB-dtLMF7dWmTFz5w23e7IB74R7drmss"
-          />
+    <div className="min-h-screen bg-background flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-body">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="flex justify-center mb-6">
+          <Link to="/" className="text-2xl font-display font-semibold tracking-tight text-on-background">CueAI</Link>
         </div>
-        {/* Subtle Overlay Content */}
-        <div className="relative z-10 p-margin-desktop flex flex-col justify-between h-full bg-gradient-to-tr from-surface-container-lowest via-transparent to-transparent">
-          <div>
-            <h1 className="font-headline-md text-headline-md font-bold tracking-tighter text-on-surface">
-              Cue AI
-            </h1>
-            <p className="font-label-caps text-label-caps text-secondary mt-base">
-              PRECISION PROMPTING SYSTEM
-            </p>
-          </div>
-          <div className="max-w-md">
-            <h2 className="font-headline-lg text-headline-lg mb-stack-sm">
-              The forge for next-generation creators.
-            </h2>
-            <p className="font-body-lg text-body-lg text-on-surface-variant">
-              Join an elite ecosystem of prompt engineers and digital architects.
-              Harness the power of Cue AI to accelerate your creative workflow.
-            </p>
-          </div>
-        </div>
-        {/* Ambient Particle Effect (JS) */}
-        <canvas
-          className="absolute inset-0 pointer-events-none opacity-40"
-          id="ambientCanvas"
-        />
-      </aside>
-      {/* Right Column: Signup Form */}
-      <main className="flex-1 min-h-screen flex items-center justify-center p-margin-mobile md:p-margin-desktop bg-background">
-        <div className="w-full max-w-[440px] flex flex-col gap-stack-lg">
-          {/* Mobile Header Only */}
-          <div className="md:hidden">
-            <h1 className="font-headline-md text-headline-md font-bold tracking-tighter text-on-surface">
-              Cue AI
-            </h1>
-          </div>
-          <header className="flex flex-col gap-stack-xs">
-            <h2 className="font-headline-md text-headline-md text-on-surface">
-              Create your account
-            </h2>
-            <p className="font-body-md text-body-md text-on-surface-variant">
-              Start building with advanced AI tools today.
-            </p>
-          </header>
-          <form
-            className="flex flex-col gap-stack-md"
-            onsubmit="event.preventDefault();"
-          >
-            {/* Full Name Field */}
-            <div className="flex flex-col gap-base">
-              <label
-                className="font-label-md text-label-md text-on-surface-variant"
-                htmlFor="fullname"
-              >
-                Full Name
+        <h2 className="text-center text-3xl font-display font-bold text-on-background mb-2">
+          Create an account
+        </h2>
+        <p className="text-center text-sm text-on-surface-variant">
+          Start building and exploring AI prompts today
+        </p>
+      </div>
+
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="premium-card py-8 px-4 shadow-elevated sm:rounded-lg sm:px-10">
+          <form className="space-y-6" action="#" method="POST">
+            <div>
+              <label htmlFor="name" className="block text-sm font-semibold text-on-surface-variant mb-1">
+                Full name
               </label>
-              <div className="input-glow flex items-center bg-surface-container-lowest border border-outline-variant/30 rounded-lg h-12 px-stack-sm transition-all duration-300">
-                <span
-                  className="material-symbols-outlined text-outline text-[20px] mr-stack-sm"
-                  data-icon="person"
-                >
-                  person
-                </span>
+              <div className="mt-1">
                 <input
-                  className="bg-transparent border-none focus:ring-0 w-full font-label-caps text-label-caps placeholder:text-outline/50"
-                  id="fullname"
-                  name="fullname"
-                  placeholder="Alan Turing"
+                  id="name"
+                  name="name"
                   type="text"
+                  autoComplete="name"
+                  required
+                  className="appearance-none block w-full px-3 py-2 border border-outline-variant bg-surface rounded-md shadow-sm text-on-background focus:outline-none focus:ring-primary focus:border-primary sm:text-sm transition-colors"
                 />
               </div>
             </div>
-            {/* Email Field */}
-            <div className="flex flex-col gap-base">
-              <label
-                className="font-label-md text-label-md text-on-surface-variant"
-                htmlFor="email"
-              >
-                Email Address
+
+            <div>
+              <label htmlFor="email" className="block text-sm font-semibold text-on-surface-variant mb-1">
+                Email address
               </label>
-              <div className="input-glow flex items-center bg-surface-container-lowest border border-outline-variant/30 rounded-lg h-12 px-stack-sm transition-all duration-300">
-                <span
-                  className="material-symbols-outlined text-outline text-[20px] mr-stack-sm"
-                  data-icon="alternate_email"
-                >
-                  alternate_email
-                </span>
+              <div className="mt-1">
                 <input
-                  className="bg-transparent border-none focus:ring-0 w-full font-label-caps text-label-caps placeholder:text-outline/50"
                   id="email"
                   name="email"
-                  placeholder="name@company.com"
                   type="email"
+                  autoComplete="email"
+                  required
+                  className="appearance-none block w-full px-3 py-2 border border-outline-variant bg-surface rounded-md shadow-sm text-on-background focus:outline-none focus:ring-primary focus:border-primary sm:text-sm transition-colors"
                 />
               </div>
             </div>
-            {/* Password Field */}
-            <div className="flex flex-col gap-base">
-              <div className="flex justify-between items-center">
-                <label
-                  className="font-label-md text-label-md text-on-surface-variant"
-                  htmlFor="password"
-                >
-                  Password
-                </label>
-                <span className="font-label-md text-label-md text-outline cursor-pointer hover:text-on-surface transition-colors">
-                  Show
-                </span>
-              </div>
-              <div className="input-glow flex items-center bg-surface-container-lowest border border-outline-variant/30 rounded-lg h-12 px-stack-sm transition-all duration-300">
-                <span
-                  className="material-symbols-outlined text-outline text-[20px] mr-stack-sm"
-                  data-icon="lock"
-                >
-                  lock
-                </span>
+
+            <div>
+              <label htmlFor="password" className="block text-sm font-semibold text-on-surface-variant mb-1">
+                Password
+              </label>
+              <div className="mt-1">
                 <input
-                  className="bg-transparent border-none focus:ring-0 w-full font-label-caps text-label-caps placeholder:text-outline/50"
                   id="password"
                   name="password"
-                  placeholder="••••••••"
                   type="password"
+                  autoComplete="new-password"
+                  required
+                  className="appearance-none block w-full px-3 py-2 border border-outline-variant bg-surface rounded-md shadow-sm text-on-background focus:outline-none focus:ring-primary focus:border-primary sm:text-sm transition-colors"
                 />
               </div>
             </div>
-            {/* Terms */}
-            <p className="font-label-md text-label-md text-on-surface-variant leading-relaxed">
-              By clicking "Create Account", you agree to our
-              <a className="text-primary hover:underline" href="#">
-                Terms of Service
-              </a>{" "}
-              and
-              <a className="text-primary hover:underline" href="#">
-                Privacy Policy
-              </a>
-              .
-            </p>
-            {/* Primary Action */}
-            <button
-              className="primary-glow h-12 bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline-md text-label-md rounded-lg font-bold hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
-              type="submit"
-            >
-              Create Account
-            </button>
-          </form>
-          {/* Separator */}
-          <div className="flex items-center gap-stack-sm">
-            <div className="h-[1px] flex-1 bg-outline-variant/20" />
-            <span className="font-label-md text-label-md text-outline">OR</span>
-            <div className="h-[1px] flex-1 bg-outline-variant/20" />
-          </div>
-          {/* Toggle/Secondary Action */}
-          <div className="flex flex-col gap-stack-sm items-center">
-            <a
-              className="group flex items-center gap-base glass-panel px-stack-md py-stack-sm rounded-full transition-all duration-300 hover:bg-surface-container-highest"
-              href="#"
-            >
-              <span
-                className="material-symbols-outlined text-secondary text-[20px]"
-                data-icon="bolt"
-              >
-                bolt
-              </span>
-              <span className="font-label-md text-label-md text-on-surface">
-                Sign up as a Creator instead
-              </span>
-            </a>
-            <p className="font-label-md text-label-md text-on-surface-variant mt-stack-sm">
-              Already have an account?{" "}
-              <a className="text-primary font-bold hover:underline" href="#">
-                Sign In
-              </a>
-            </p>
-          </div>
-        </div>
-      </main>
-      </div>
-    </>
 
+            <div>
+              <button
+                type="submit"
+                className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-semibold text-background bg-on-background hover:bg-secondary transition-colors"
+              >
+                Create account
+              </button>
+            </div>
+          </form>
+
+          <div className="mt-6">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-outline-variant" />
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-surface text-on-surface-variant">Or continue with</span>
+              </div>
+            </div>
+
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              <div>
+                <a href="#" className="w-full inline-flex justify-center py-2 px-4 border border-outline-variant rounded-md shadow-sm bg-surface text-sm font-medium text-on-surface-variant hover:bg-surface-variant transition-colors">
+                  <span className="sr-only">Sign in with Google</span>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" />
+                  </svg>
+                </a>
+              </div>
+              <div>
+                <a href="#" className="w-full inline-flex justify-center py-2 px-4 border border-outline-variant rounded-md shadow-sm bg-surface text-sm font-medium text-on-surface-variant hover:bg-surface-variant transition-colors">
+                  <span className="sr-only">Sign in with GitHub</span>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                    <path fillRule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clipRule="evenodd" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <p className="mt-8 text-center text-sm text-on-surface-variant">
+            Already have an account?{' '}
+            <Link to="/login" className="font-semibold text-primary hover:text-blue-500">
+              Sign in
+            </Link>
+          </p>
+        </div>
+      </div>
+    </div>
   );
 };
 
