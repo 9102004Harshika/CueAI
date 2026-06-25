@@ -21,7 +21,11 @@ const SignupSchema = new mongoose.Schema({
     region: String,
     city: String,
   },
- 
+  apiTokens: [{
+    name: String,
+    keyHash: String,
+    createdAt: { type: Date, default: Date.now }
+  }],
 });
 
 export const SignupModel = mongoose.model('users', SignupSchema);

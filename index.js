@@ -22,6 +22,9 @@ import {
 } from './controllers/Cart.js';
 import { CheckoutSession } from './controllers/Payment.js';
 import { GetOrders, SaveOrder } from './controllers/Order.js';
+import { getOrganizations, createOrganization, inviteMember } from './controllers/Organization.js';
+import { generateApiKey, executePrompt } from './controllers/ApiGateway.js';
+import { getFeed, createPost, likePost } from './controllers/Feed.js';
 import { SubmitIssue } from './controllers/Issue.js';
 
 const app = express();
@@ -31,8 +34,11 @@ app.use(express.json());
 app.use(cors());
 app.use(useragent.express());
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 // MongoDB connection
-const dbURI = "mongodb+srv://harshika:harshika@cueai.kdfxx.mongodb.net/CueAI?retryWrites=true&w=majority"; // Include database name
+const dbURI = process.env.MONGODB_URI;
 mongoose.connect(dbURI, {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
@@ -95,6 +101,20 @@ app.delete('/clear-cart', ClearCart);
 
 // Issues routes
 app.post('/submitIssue', SubmitIssue);
+
+// Organization routes
+app.get('/organizations', getOrganizations);
+app.post('/organizations/create', createOrganization);
+app.post('/organizations/:orgId/invite', inviteMember);
+
+// API Gateway routes
+app.post('/user/:username/api-keys/generate', generateApiKey);
+app.post('/v1/execute', executePrompt);
+
+// Feed routes
+app.get('/feed', getFeed);
+app.post('/feed/create', createPost);
+app.post('/feed/:postId/like', likePost);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
