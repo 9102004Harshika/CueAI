@@ -26,6 +26,7 @@ import { getOrganizations, createOrganization, inviteMember } from './controller
 import { generateApiKey, executePrompt } from './controllers/ApiGateway.js';
 import { getFeed, createPost, likePost } from './controllers/Feed.js';
 import { SubmitIssue } from './controllers/Issue.js';
+import { startOrchestrator } from './src/orchestrator/index.js';
 
 const app = express();
 
@@ -120,4 +121,6 @@ app.post('/feed/:postId/like', likePost);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+    // Optional: Start the autonomous orchestrator in the background
+    // startOrchestrator();
 });

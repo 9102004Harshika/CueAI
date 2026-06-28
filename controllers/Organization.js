@@ -1,5 +1,5 @@
 import Organization from '../models/Organization.js';
-import User from '../models/User.js';
+import { SignupModel as User } from '../models/Signup.js';
 
 export const createOrganization = async (req, res) => {
     try {
