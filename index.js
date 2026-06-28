@@ -64,6 +64,6 @@ const server = http.createServer(app);
 socketService.initialize(server);
 
 server.listen(PORT, () => {
-    logger.info(`Server is running on port ${PORT}`);
+    console.log("========== CUEAI TEST BUILD v999 ==========");
     logger.info(`API Documentation available at http://localhost:${PORT}/api-docs`);
 });
