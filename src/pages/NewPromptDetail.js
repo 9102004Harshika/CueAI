@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
-import AppShell from "../components/layout/AppShell";
-import MarketingFooter from "../components/layout/MarketingFooter";
+import { ChevronRight, Heart, ShieldCheck, ShoppingCart, Lock } from "lucide-react";
 
 const NewPromptDetail = () => {
   const { id } = useParams();
@@ -16,7 +15,7 @@ const NewPromptDetail = () => {
   // We use dummy data for visualization purposes if backend isn't connected,
   // but we retain the axios call to maintain functionality
   useEffect(() => {
-    axios.get(`http://localhost:5000/prompt/${id}`)
+    axios.get(`http://localhost:5000/api/v1/prompt/${id}`)
       .then((res) => {
         setPrompt(res.data);
       })
@@ -46,40 +45,38 @@ const NewPromptDetail = () => {
 
   if (!prompt) {
     return (
-      <AppShell>
-        <div className="flex items-center justify-center min-h-[50vh]">
-          <div className="text-on-surface-variant font-mono text-sm animate-pulse">Loading prompt data...</div>
-        </div>
-      </AppShell>
+      <div className="flex items-center justify-center min-h-[50vh]">
+        <div className="text-gray-500 font-mono text-sm animate-pulse">Loading prompt data...</div>
+      </div>
     );
   }
 
   return (
-    <AppShell activeNavItem="Exploration">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 font-sans">
       
       {/* Breadcrumb Navigation */}
-      <div className="flex items-center gap-2 text-sm text-on-surface-variant mb-8 font-medium">
-        <Link to="/marketplace" className="hover:text-on-surface transition-colors">Marketplace</Link>
-        <span className="material-symbols-outlined text-[14px]">chevron_right</span>
-        <span className="text-on-surface">{prompt.title}</span>
+      <div className="flex items-center gap-2 text-sm text-gray-500 mb-8 font-medium">
+        <Link to="/marketplace" className="hover:text-gray-900 transition-colors">Marketplace</Link>
+        <ChevronRight size={14} />
+        <span className="text-gray-900">{prompt.title}</span>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
         
         {/* Left Column: Image & Previews */}
         <div className="lg:col-span-7">
-          <div className="premium-card overflow-hidden bg-surface-variant p-2 mb-4">
+          <div className="bg-gray-100 rounded-xl overflow-hidden p-2 mb-4 border border-gray-200">
             <img 
               src={prompt.exampleOutput} 
               alt={prompt.title} 
-              className="w-full h-auto aspect-video md:aspect-[4/3] object-cover rounded-md shadow-sm"
+              className="w-full h-auto aspect-video md:aspect-[4/3] object-cover rounded-lg shadow-sm"
             />
           </div>
           
           <div className="grid grid-cols-4 gap-2">
              {/* Thumbnail placeholders */}
              {[1,2,3,4].map((i) => (
-                <div key={i} className={`aspect-square rounded-md overflow-hidden bg-surface-variant cursor-pointer border-2 ${i === 1 ? 'border-primary' : 'border-transparent hover:border-outline'}`}>
+                <div key={i} className={`aspect-square rounded-lg overflow-hidden bg-gray-100 cursor-pointer border-2 ${i === 1 ? 'border-indigo-600' : 'border-transparent hover:border-gray-300'}`}>
                    <img src={prompt.exampleOutput} alt="Thumbnail" className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" />
                 </div>
              ))}
@@ -89,53 +86,50 @@ const NewPromptDetail = () => {
         {/* Right Column: Prompt Details & Actions */}
         <div className="lg:col-span-5 flex flex-col">
           <div className="flex justify-between items-start mb-2">
-            <h1 className="text-3xl font-display font-bold text-on-background leading-tight">
+            <h1 className="text-3xl font-bold text-gray-900 leading-tight">
               {prompt.title}
             </h1>
             <button 
               onClick={() => setIsLiked(!isLiked)}
-              className={`p-2 rounded-full border border-outline-variant transition-colors flex-shrink-0 ml-4 ${isLiked ? 'bg-error/10 text-error border-error/30' : 'bg-surface hover:bg-surface-variant text-on-surface-variant'}`}
+              className={`p-2 rounded-full border transition-colors flex-shrink-0 ml-4 ${isLiked ? 'bg-red-50 text-red-500 border-red-200' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-400'}`}
             >
-              <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: isLiked ? '"FILL" 1' : '"FILL" 0' }}>
-                favorite
-              </span>
+              <Heart size={20} className={isLiked ? "fill-current" : ""} />
             </button>
           </div>
           
           <div className="flex items-center gap-3 mb-6">
              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xs">V</div>
+                <div className="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-xs">V</div>
                 <Link to={`/${prompt.username}`} className="text-sm font-semibold hover:underline">{prompt.username}</Link>
              </div>
-             <span className="text-outline-variant">•</span>
-             <span className="bg-surface border border-outline-variant text-on-surface text-[10px] font-mono px-2 py-0.5 rounded shadow-sm">
+             <span className="text-gray-300">•</span>
+             <span className="bg-gray-100 border border-gray-200 text-gray-700 text-[10px] font-mono px-2 py-0.5 rounded shadow-sm">
                 {prompt.model}
              </span>
           </div>
 
-          <div className="text-3xl font-display font-semibold text-on-background mb-8">
+          <div className="text-3xl font-bold text-gray-900 mb-8">
             ${prompt.price}
           </div>
 
-          <p className="text-on-surface-variant text-sm leading-relaxed mb-8">
+          <p className="text-gray-600 text-sm leading-relaxed mb-8">
             {prompt.description}
           </p>
 
           <div className="flex flex-col gap-3 mb-8">
-             <button onClick={handleGetPromptClick} className="w-full bg-primary text-on-primary font-semibold py-3 rounded-md shadow-sm hover:bg-blue-700 transition-colors">
+             <button onClick={handleGetPromptClick} className="w-full bg-indigo-600 text-white font-semibold py-3 rounded-xl shadow-sm hover:bg-indigo-700 transition-colors">
                Purchase Prompt
              </button>
-             <button onClick={handleCartClick} className="w-full bg-surface border border-outline-variant text-on-surface font-semibold py-3 rounded-md hover:bg-surface-variant transition-colors flex items-center justify-center gap-2">
-               <span className="material-symbols-outlined text-[18px]">shopping_cart</span>
-               Add to Cart
+             <button onClick={handleCartClick} className="w-full bg-white border border-gray-200 text-gray-700 font-semibold py-3 rounded-xl hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+               <ShoppingCart size={18} /> Add to Cart
              </button>
           </div>
 
-          <div className="bg-surface p-4 rounded-md border border-outline-variant flex items-start gap-3">
-             <span className="material-symbols-outlined text-primary text-[20px]">verified_user</span>
+          <div className="bg-indigo-50 p-4 rounded-xl border border-indigo-100 flex items-start gap-3">
+             <ShieldCheck size={20} className="text-indigo-600 shrink-0" />
              <div>
-                <h4 className="text-sm font-semibold text-on-background mb-1">Instant Access & Free Credits</h4>
-                <p className="text-xs text-on-surface-variant">Purchasing grants immediate access to the full prompt text and 20 generation credits in the CueAI playground.</p>
+                <h4 className="text-sm font-semibold text-gray-900 mb-1">Instant Access & Free Credits</h4>
+                <p className="text-xs text-gray-600">Purchasing grants immediate access to the full prompt text and 20 generation credits in the CueAI playground.</p>
              </div>
           </div>
         </div>
@@ -143,16 +137,16 @@ const NewPromptDetail = () => {
 
       {/* Tabs & Technical Details */}
       <div className="mb-16">
-         <div className="flex gap-6 border-b border-outline-variant mb-6">
+         <div className="flex gap-6 border-b border-gray-200 mb-6">
             <button 
               onClick={() => setActiveTab('details')}
-              className={`pb-3 text-sm font-semibold transition-colors ${activeTab === 'details' ? 'text-primary border-b-2 border-primary' : 'text-on-surface-variant hover:text-on-surface'}`}
+              className={`pb-3 text-sm font-semibold transition-colors ${activeTab === 'details' ? 'text-indigo-600 border-b-2 border-indigo-600' : 'text-gray-500 hover:text-gray-900'}`}
             >
               Technical Specs
             </button>
             <button 
               onClick={() => setActiveTab('reviews')}
-              className={`pb-3 text-sm font-semibold transition-colors ${activeTab === 'reviews' ? 'text-primary border-b-2 border-primary' : 'text-on-surface-variant hover:text-on-surface'}`}
+              className={`pb-3 text-sm font-semibold transition-colors ${activeTab === 'reviews' ? 'text-indigo-600 border-b-2 border-indigo-600' : 'text-gray-500 hover:text-gray-900'}`}
             >
               Reviews (12)
             </button>
@@ -160,45 +154,43 @@ const NewPromptDetail = () => {
 
          {activeTab === 'details' && (
            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-             <div className="premium-card p-6">
-                <h3 className="text-sm font-semibold text-on-background mb-4 uppercase tracking-wider font-mono">Example Input</h3>
-                <div className="bg-background border border-outline-variant rounded-md p-4 relative group">
-                  <pre className="text-xs text-on-surface-variant font-mono whitespace-pre-wrap leading-relaxed">
+             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h3 className="text-sm font-bold text-gray-900 mb-4 uppercase tracking-wider font-mono">Example Input</h3>
+                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 relative group">
+                  <pre className="text-xs text-gray-600 font-mono whitespace-pre-wrap leading-relaxed">
                     {prompt.exampleInput}
                   </pre>
                   <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span className="material-symbols-outlined text-on-surface-variant cursor-not-allowed" title="Unlock prompt to copy">lock</span>
+                    <Lock size={16} className="text-gray-400 cursor-not-allowed" title="Unlock prompt to copy" />
                   </div>
                 </div>
              </div>
              
-             <div className="premium-card p-6">
-                <h3 className="text-sm font-semibold text-on-background mb-4 uppercase tracking-wider font-mono">Model Configuration</h3>
+             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h3 className="text-sm font-bold text-gray-900 mb-4 uppercase tracking-wider font-mono">Model Configuration</h3>
                 <div className="space-y-4">
-                  <div className="flex justify-between border-b border-outline-variant pb-2">
-                    <span className="text-sm text-on-surface-variant">Base Model</span>
-                    <span className="text-sm font-mono text-on-background">{prompt.model}</span>
+                  <div className="flex justify-between border-b border-gray-100 pb-2">
+                    <span className="text-sm text-gray-500">Base Model</span>
+                    <span className="text-sm font-mono text-gray-900">{prompt.model}</span>
                   </div>
-                  <div className="flex justify-between border-b border-outline-variant pb-2">
-                    <span className="text-sm text-on-surface-variant">Aspect Ratio</span>
-                    <span className="text-sm font-mono text-on-background">16:9</span>
+                  <div className="flex justify-between border-b border-gray-100 pb-2">
+                    <span className="text-sm text-gray-500">Aspect Ratio</span>
+                    <span className="text-sm font-mono text-gray-900">16:9</span>
                   </div>
-                  <div className="flex justify-between border-b border-outline-variant pb-2">
-                    <span className="text-sm text-on-surface-variant">Stylize</span>
-                    <span className="text-sm font-mono text-on-background">Raw</span>
+                  <div className="flex justify-between border-b border-gray-100 pb-2">
+                    <span className="text-sm text-gray-500">Stylize</span>
+                    <span className="text-sm font-mono text-gray-900">Raw</span>
                   </div>
                   <div className="flex justify-between pb-2">
-                    <span className="text-sm text-on-surface-variant">Complexity</span>
-                    <span className="text-sm font-mono text-on-background">Advanced</span>
+                    <span className="text-sm text-gray-500">Complexity</span>
+                    <span className="text-sm font-mono text-gray-900">Advanced</span>
                   </div>
                 </div>
              </div>
            </div>
          )}
       </div>
-
-      <MarketingFooter />
-    </AppShell>
+    </div>
   );
 };
 

@@ -1,6 +1,7 @@
-import { lazy } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { lazy, Suspense } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import Layout from './components/Layout';
 
 const Home = lazy(() => import('./pages/Home'));
 const CreatorLogin = lazy(() => import('./pages/CreatorLogin'));
@@ -41,47 +42,54 @@ const Pricing = lazy(() => import('./pages/Pricing'));
 const AppRoutes = () => {
   const location = useLocation();
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path='/' element={<Home />} />
-        <Route path='/marketplace' element={<Marketplace />} />
-        <Route path='/marketplace' element={<Marketplace />} />
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/organizations' element={<Organizations />} />
-        <Route path='/admin-dashboard' element={<AdminDashboard />} />
-        <Route path='/pricing' element={<Pricing />} />
-        <Route path='/api-keys' element={<ApiKeys />} />
-        <Route path='/docs' element={<ApiDocs />} />
-        <Route path="/creator-signup/step-2" element={<CreatorOnboardingStep2 />} />
-        <Route path="/creator-signup/final" element={<CreatorOnboardingFinal />} />
-        <Route path='/marketplace/prompt/:id' element={<NewPromptDetail />} />
-        <Route path='/playground' element={<Playground />} />
-        <Route path="/creator-login" element={<CreatorLogin />} />
-        <Route path="/creator-signup" element={<CreatorSignup />} />
-        <Route path='/feed' element={<CreatorFeed />} />
-        <Route path='/creator' element={<CreatorProfile />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/forgotPassword' element={<ForgotPassword />} />
-        <Route path='/resetPassword' element={<NewPassword />} />
-        <Route path='/:username' element={<Profile />} />
-        <Route path='/:username/prompt' element={<Prompt />} />
-        <Route path='/prompt/:id' element={<NewPromptDetail />} />
-        <Route path='/editprompt/:promptId' element={<Edit />} />
-        <Route path='/:username/profile' element={<Profile />} />
-        <Route path='/admin' element={<AdminPage />} />
-        <Route path='/admin/approvePrompt' element={<ApprovePrompt />} />
-        <Route path='/admin/managePrompts' element={<ManagePrompts />} />
-        <Route path='/:username/cart' element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path='/:username/success' element={<Success />} />
-        <Route path='/:username/orders' element={<Orders />} />
-        <Route path='/cancel' element={<Cancel />} />
-        <Route path='/terms' element={<TermsAndConditions />} />
-        <Route path='/privacy-policy' element={<PrivacyPolicy />} />
-        <Route path='/faq' element={<FAQ />} />
-      </Routes>
-    </AnimatePresence>
+    <Layout>
+      <Suspense fallback={
+        <div className="flex h-[calc(100vh-64px)] items-center justify-center bg-gray-50">
+           <div className="w-10 h-10 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
+        </div>
+      }>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+          <Route path='/' element={<Home />} />
+          <Route path='/marketplace' element={<Marketplace />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/organizations' element={<Organizations />} />
+          <Route path='/admin-dashboard' element={<AdminDashboard />} />
+          <Route path='/pricing' element={<Pricing />} />
+          <Route path='/api-keys' element={<ApiKeys />} />
+          <Route path='/docs' element={<ApiDocs />} />
+          <Route path="/creator-signup/step-2" element={<CreatorOnboardingStep2 />} />
+          <Route path="/creator-signup/final" element={<CreatorOnboardingFinal />} />
+          <Route path='/marketplace/prompt/:id' element={<NewPromptDetail />} />
+          <Route path='/playground' element={<Playground />} />
+          <Route path="/creator-login" element={<CreatorLogin />} />
+          <Route path="/creator-signup" element={<CreatorSignup />} />
+          <Route path='/feed' element={<CreatorFeed />} />
+          <Route path='/creator' element={<CreatorProfile />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/forgotPassword' element={<ForgotPassword />} />
+          <Route path='/resetPassword' element={<NewPassword />} />
+          <Route path='/:username' element={<Profile />} />
+          <Route path='/:username/prompt' element={<Prompt />} />
+          <Route path='/prompt/:id' element={<NewPromptDetail />} />
+          <Route path='/editprompt/:promptId' element={<Edit />} />
+          <Route path='/:username/profile' element={<Profile />} />
+          <Route path='/admin' element={<AdminPage />} />
+          <Route path='/admin/approvePrompt' element={<ApprovePrompt />} />
+          <Route path='/admin/managePrompts' element={<ManagePrompts />} />
+          <Route path='/:username/cart' element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path='/:username/success' element={<Success />} />
+          <Route path='/:username/orders' element={<Orders />} />
+          <Route path='/cancel' element={<Cancel />} />
+          <Route path='/terms' element={<TermsAndConditions />} />
+          <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+          <Route path='/faq' element={<FAQ />} />
+          </Routes>
+        </AnimatePresence>
+      </Suspense>
+    </Layout>
   );
 };
 

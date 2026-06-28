@@ -28,7 +28,7 @@ const PromptDetail = () => {
     const storedUsername = localStorage.getItem('username');
     setUsername(storedUsername);
 
-    axios.get(`http://localhost:5000/prompt/${id}`)
+    axios.get(`http://localhost:5000/api/v1/prompt/${id}`)
       .then((result) => {
         const foundPrompt = result.data;
         setPrompt(foundPrompt);
@@ -56,11 +56,11 @@ const PromptDetail = () => {
   // Fetch user details and other prompts by the user
   useEffect(() => {
     if (prompt) {
-      axios.get(`http://localhost:5000/user/${prompt.username}`)
+      axios.get(`http://localhost:5000/api/v1/user/${prompt.username}`)
         .then((result) => {
           setUserInfo(result.data);
 
-          axios.get(`http://localhost:5000/user/${prompt.username}/prompts`)
+          axios.get(`http://localhost:5000/api/v1/user/${prompt.username}/prompts`)
             .then((response) => {
               const filteredPrompts = response.data.filter((p) => p.title !== prompt.title);
               setUserPrompts(filteredPrompts);
@@ -76,9 +76,9 @@ const PromptDetail = () => {
   const handleHeartClick = async () => {
     try {
       if (isLiked) {
-        await axios.delete(`http://localhost:5000/user/${username}/favorites/${id}`);
+        await axios.delete(`http://localhost:5000/api/v1/user/${username}/favorites/${id}`);
       } else {
-        await axios.post(`http://localhost:5000/user/${username}/favorites`, { promptId: id });
+        await axios.post(`http://localhost:5000/api/v1/user/${username}/favorites`, { promptId: id });
       }
       setIsLiked(!isLiked);
     } catch (err) {
@@ -89,7 +89,7 @@ const PromptDetail = () => {
   // Handle add to cart button click
   const handleCartClick = async () => {
     try {
-      await axios.post("http://localhost:5000/addToCart", {
+      await axios.post("http://localhost:5000/api/v1/addToCart", {
         username: username,
         promptId: id
       });
@@ -104,7 +104,7 @@ const PromptDetail = () => {
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:5000/prompt/${id}/review`, {
+      const response = await axios.post(`http://localhost:5000/api/v1/prompt/${id}/review`, {
         username: username,
         review: newReview,
         rating: rating,

@@ -16,7 +16,7 @@ export const UserAnalytics = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const statsResponse = await axios.get('http://localhost:5000/admin/getStats');
+        const statsResponse = await axios.get('http://localhost:5000/api/v1/admin/getStats');
         setStats(statsResponse.data);
       } catch (error) {
         console.error('Error fetching stats:', error);
@@ -214,7 +214,7 @@ export const PromptsAnalytics = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const statsResponse = await axios.get('http://localhost:5000/admin/getPromptStats');
+        const statsResponse = await axios.get('http://localhost:5000/api/v1/admin/getPromptStats');
         setStats(statsResponse.data);
       } catch (error) {
         console.error('Error fetching prompt stats:', error);

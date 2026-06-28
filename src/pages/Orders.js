@@ -13,7 +13,7 @@ const Orders = () => {
 
   useEffect(() => {
     // Fetch order details when the component mounts
-    axios.get(`http://localhost:5000/${username}/getOrders`)
+    axios.get(`http://localhost:5000/api/v1/${username}/getOrders`)
       .then(response => {
         if (Array.isArray(response.data)) {
           setOrders(response.data);
@@ -35,7 +35,7 @@ const Orders = () => {
 
   const handleGetPromptFile = async (promptId) => {
     try {
-      const response = await axios.get(`http://localhost:5000/getPromptFile/${promptId}`, {
+      const response = await axios.get(`http://localhost:5000/api/v1/getPromptFile/${promptId}`, {
         responseType: 'blob' // Important to handle file downloads
       });
       

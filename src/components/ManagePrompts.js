@@ -17,7 +17,7 @@ const ManagePrompts = () => {
 
   const fetchPrompts = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/getPrompts');
+      const response = await axios.get('http://localhost:5000/api/v1/getPrompts');
       setPrompts(response.data);
       setFilteredPrompts(response.data);
     } catch (error) {
@@ -49,7 +49,7 @@ const ManagePrompts = () => {
 
   const handleUpdate = async (id) => {
     try {
-      await axios.post(`http://localhost:5000/prompt/${id}/update`, editPrompt);
+      await axios.post(`http://localhost:5000/api/v1/prompt/${id}/update`, editPrompt);
       setEditPrompt(null);
       fetchPrompts();
     } catch (error) {
@@ -60,9 +60,9 @@ const ManagePrompts = () => {
   const handleDelete = async (id) => {
     try {
       const prompt = prompts.find(prompt => prompt._id === id);
-      await axios.delete(`http://localhost:5000/prompt/${id}/delete`);
+      await axios.delete(`http://localhost:5000/api/v1/prompt/${id}/delete`);
       setPrompts(prompts.map(prompt => prompt._id === id ? { ...prompt, deleted: true } : prompt));
-      axios.post('http://localhost:5000/addActivity', { username: prompt.username, activity: "Moved prompt to trash" }, date);
+      axios.post('http://localhost:5000/api/v1/addActivity', { username: prompt.username, activity: "Moved prompt to trash" }, date);
     } catch (error) {
       console.error('Error deleting prompt:', error);
     }
@@ -71,9 +71,9 @@ const ManagePrompts = () => {
   const handleRestore = async (id) => {
     try {
       const prompt = prompts.find(prompt => prompt._id === id);
-      await axios.put(`http://localhost:5000/prompt/${id}/restore`);
+      await axios.put(`http://localhost:5000/api/v1/prompt/${id}/restore`);
       setPrompts(prompts.map(prompt => prompt._id === id ? { ...prompt, deleted: false } : prompt));
-      axios.post('http://localhost:5000/addActivity', { username: prompt.username, activity: "Restored a prompt" }, date);
+      axios.post('http://localhost:5000/api/v1/addActivity', { username: prompt.username, activity: "Restored a prompt" }, date);
     } catch (error) {
       console.error('Error restoring prompt:', error);
     }
@@ -81,9 +81,9 @@ const ManagePrompts = () => {
 
   const handlePermanentDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/prompt/${id}/permanently`);
+      await axios.delete(`http://localhost:5000/api/v1/prompt/${id}/permanently`);
       setPrompts(prompts.filter(prompt => prompt._id !== id));
-      axios.post('http://localhost:5000/addActivity', { username: id, activity: "Permanently deleted a prompt" }, date);
+      axios.post('http://localhost:5000/api/v1/addActivity', { username: id, activity: "Permanently deleted a prompt" }, date);
     } catch (error) {
       console.error('Error permanently deleting prompt:', error);
     }

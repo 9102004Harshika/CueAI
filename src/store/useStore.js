@@ -1,23 +1,10 @@
 import { create } from 'zustand';
+import { createAuthSlice } from './slices/createAuthSlice.js';
+import { createCartSlice } from './slices/createCartSlice.js';
+import { createUISlice } from './slices/createUISlice.js';
 
-export const useStore = create((set) => ({
-  // Auth State
-  user: null,
-  isAuthenticated: false,
-  setUser: (user) => set({ user, isAuthenticated: !!user }),
-  logout: () => set({ user: null, isAuthenticated: false }),
-
-  // Cart State
-  cart: [],
-  addToCart: (item) => set((state) => ({ cart: [...state.cart, item] })),
-  removeFromCart: (itemId) => set((state) => ({ cart: state.cart.filter(i => i.id !== itemId) })),
-  clearCart: () => set({ cart: [] }),
-
-  // UI State
-  sidebarOpen: false,
-  toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
-  
-  // Theme State
-  theme: 'dark',
-  setTheme: (theme) => set({ theme }),
+export const useStore = create((...a) => ({
+  ...createAuthSlice(...a),
+  ...createCartSlice(...a),
+  ...createUISlice(...a),
 }));
