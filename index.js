@@ -37,6 +37,13 @@ app.use(useragent.express());
 // MongoDB connection
 connectDatabase();
 
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    message: 'CueAI Backend Running'
+  });
+});
+
 // API Version 1 Routes
 app.use('/api/v1', v1Routes);
 
