@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
 import axios from "axios";
 import { ChevronRight, Heart, ShieldCheck, ShoppingCart, Lock } from "lucide-react";
 

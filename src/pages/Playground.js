@@ -183,7 +183,7 @@ const Playground = () => {
 
           {activeTab === 'code' && (
             <div className="rounded-xl border border-[#1e2030] bg-[#0d0e17] p-5 h-full font-mono text-xs">
-              <p className="text-[#6b7280] mb-4">// Integration Code (Node.js)</p>
+              <p className="text-[#6b7280] mb-4">{'// Integration Code (Node.js)'}</p>
               <p><span className="text-[#c678dd]">import</span> {`{ `}<span className="text-[#e5c07b]">CueAI</span>{` }`} <span className="text-[#c678dd]">from</span> <span className="text-[#98c379]">'cueai'</span>;</p>
               <br />
               <p><span className="text-[#c678dd]">const</span> cue = <span className="text-[#c678dd]">new</span> <span className="text-[#61afef]">CueAI</span>({'{'} apiKey: process.env.<span className="text-[#e5c07b]">CUE_API_KEY</span> {'}'});</p>
@@ -198,7 +198,7 @@ const Playground = () => {
 
           {activeTab === 'json' && (
             <div className="rounded-xl border border-[#1e2030] bg-[#0d0e17] p-5 h-full font-mono text-xs">
-              <p className="text-[#6b7280] mb-4">// Raw API Response</p>
+              <p className="text-[#6b7280] mb-4">{'// Raw API Response'}</p>
               <pre className="text-[#abb2bf] overflow-x-auto leading-relaxed">{`{
   "id": "gen_123abc",
   "object": "generation",

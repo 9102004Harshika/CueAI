@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import axios from 'axios'; // Import axios
 import { Link, useParams } from 'react-router-dom';
 
@@ -6,7 +6,7 @@ const Success = () => {
   const { username } = useParams();
 
   // Function to clear the cart
-  const clearCart = async () => {
+  const clearCart = useCallback(async () => {
     try {
       const response = await axios.delete('http://localhost:5000/api/v1/clear-cart', {
         data: { username }, // Send username in the request body using `data` property
@@ -20,12 +20,12 @@ const Success = () => {
     } catch (error) {
       console.error('Error:', error);
     }
-  };
+  }, [username]);
 
   // Use effect to clear the cart when component mounts
   useEffect(() => {
     clearCart();
-  }, []);
+  }, [clearCart]);
 
   return (
     <div className="success-container bg-[#222236] min-h-screen p-10 flex items-center justify-center">
