@@ -47,7 +47,7 @@ app.use('/', v1Routes);
 app.use(errorHandler);
 
 // Start the server
-const PORT = config.app.port || 5000;
+const PORT = process.env.PORT || 8000;
 const server = http.createServer(app);
 socketService.initialize(server);
 
