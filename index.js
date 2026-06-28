@@ -1,130 +1,57 @@
-// Import dependencies
 import express from 'express';
-import mongoose from 'mongoose';
 import cors from 'cors';
 import useragent from 'express-useragent';
-import { captureLocation } from './middleware/ip.js';
-import upload from './middleware/upload.js';
-import { 
-    Admin, VerifyOtpAndLogin, SendOtpForLogin, UpdateUser, Signup, 
-    Users, User, Otp, VerifyOtp, ResetPassword, DeletedPrompts 
-} from './controllers/User.js';
-import { 
-    Create, Show, OtherPrompts, PromptDetail, UpdatePrompt, 
-    DeletePrompt, RestorePrompt, PermanentlyDelete, GetPrompt, GetPromptFile 
-} from './controllers/Prompt.js';
-import { RecentActivity, GetActivity } from './controllers/Activity.js';
-import { 
-    ApprovePrompt, PendingPrompts, ApprovedPrompts, GetStats, GetPromptStats 
-} from './controllers/Admin.js';
-import { 
-    AddToCart, GetCartItems, UpdateQuantity, RemoveItem, ClearCart 
-} from './controllers/Cart.js';
-import { CheckoutSession } from './controllers/Payment.js';
-import { GetOrders, SaveOrder } from './controllers/Order.js';
-import { getOrganizations, createOrganization, inviteMember } from './controllers/Organization.js';
-import { generateApiKey, executePrompt } from './controllers/ApiGateway.js';
-import { getFeed, createPost, likePost } from './controllers/Feed.js';
-import { SubmitIssue } from './controllers/Issue.js';
-import { startOrchestrator } from './src/orchestrator/index.js';
+import dotenv from 'dotenv';
 
 import config from './src/config/index.js';
+import requestLogger from './src/middleware/requestLogger.js';
+import logger from './src/utils/logger.js';
+import { configureSecurity } from './src/middleware/security.js';
+import { connectDatabase } from './src/config/db.js';
+import { configureSwagger } from './src/config/swagger.js';
+import v1Routes from './src/routes/v1.js';
+import compression from 'compression';
+import cookieParser from 'cookie-parser';
+import socketService from './src/services/SocketService.js';
+import { errorHandler } from './src/middleware/errorHandler.js';
+import http from 'http';
+
+dotenv.config();
 
 const app = express();
 
+// Apply security headers & rate limiting
+configureSecurity(app);
 
+// Configure API Documentation (Swagger)
+configureSwagger(app);
 
 // Middleware
+app.use(compression()); // Compress all responses
+app.use(cookieParser()); // Parse cookies
+app.use(requestLogger); // Log HTTP requests
 app.use(express.json());
 app.use(cors());
 app.use(useragent.express());
 
-import dotenv from 'dotenv';
-dotenv.config();
-
 // MongoDB connection
-const dbURI = config.db.uri;
-mongoose.connect(dbURI, {
-    useNewUrlParser: true, 
-    useUnifiedTopology: true,
-})
-.then(() => {
-    console.log('Connected to MongoDB Atlas!');
-})
-.catch((error) => {
-    console.error('Error connecting to MongoDB Atlas:', error);
-});
+connectDatabase();
 
-// Routes
-app.post('/User', Users);
-app.get('/user/:username', User);
-app.get('/user/:username/prompts', OtherPrompts);
-app.get('/user/:username/deleted-prompts', DeletedPrompts);
-app.post('/user/:username/update', UpdateUser);
-app.post('/send-otp-for-login', SendOtpForLogin);  // New OTP-based login route to send OTP
-app.post('/verify-otp-and-login', VerifyOtpAndLogin);
-app.post('/signup', captureLocation, Signup);
-app.post('/create-admin', Admin);
+// API Version 1 Routes
+app.use('/api/v1', v1Routes);
 
-// Prompt Routes
-app.post('/createPrompt', upload.single('promptFile'), Create);
-app.get('/getPrompt', Show);
-app.get('/getPrompts', GetPrompt);
-app.get('/prompt/:promptId', PromptDetail);
-app.post('/prompt/:promptId/update', upload.single('promptFile'), UpdatePrompt);
-app.delete('/prompt/:promptId/delete', DeletePrompt);
-app.put('/prompt/:promptId/restore', RestorePrompt);
-app.delete('/prompt/:promptId/permanently', PermanentlyDelete);
-app.get('/getPromptFile/:promptId', GetPromptFile);
+// Fallback Route for non-versioned paths (optional, to avoid breaking frontend immediately)
+app.use('/', v1Routes);
 
-// Activity Routes
-app.post('/addActivity', RecentActivity);
-app.get('/recentActivity/:username', GetActivity);
-
-// OTP and Password Routes
-app.post('/sendOtp', Otp);
-app.post('/verifyOtp', VerifyOtp);
-app.post('/resetPassword', ResetPassword);
-
-// Admin Routes
-app.post('/admin/approvePrompt', ApprovePrompt);
-app.get('/admin/pendingPrompts', PendingPrompts);
-app.post('/admin/approved/:id', ApprovedPrompts);
-// app.delete('/admin/rejected/:id', RejectedPrompts);
-app.get('/admin/getStats', GetStats);
-app.get('/admin/getPromptStats', GetPromptStats);
-
-// Cart Routes
-app.post('/addToCart', AddToCart);
-app.get('/getItems', GetCartItems);
-app.post('/updateQuantity', UpdateQuantity);
-app.post('/removeItem', RemoveItem);
-app.post('/create-checkout-session', CheckoutSession);
-app.post('/saveOrder', SaveOrder);
-app.get('/:username/getOrders', GetOrders);
-app.delete('/clear-cart', ClearCart);
-
-// Issues routes
-app.post('/submitIssue', SubmitIssue);
-
-// Organization routes
-app.get('/organizations', getOrganizations);
-app.post('/organizations/create', createOrganization);
-app.post('/organizations/:orgId/invite', inviteMember);
-
-// API Gateway routes
-app.post('/user/:username/api-keys/generate', generateApiKey);
-app.post('/v1/execute', executePrompt);
-
-// Feed routes
-app.get('/feed', getFeed);
-app.post('/feed/create', createPost);
-app.post('/feed/:postId/like', likePost);
+// Step 14: Universal Error Handling (Must be last)
+app.use(errorHandler);
 
 // Start the server
-const PORT = config.app.port;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-    // Optional: Start the autonomous orchestrator in the background
-    // startOrchestrator();
+const PORT = config.app.port || 5000;
+const server = http.createServer(app);
+socketService.initialize(server);
+
+server.listen(PORT, () => {
+    logger.info(`Server is running on port ${PORT}`);
+    logger.info(`API Documentation available at http://localhost:${PORT}/api-docs`);
 });
