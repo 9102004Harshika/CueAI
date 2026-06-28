@@ -1,7 +1,8 @@
 import Stripe from 'stripe';
-import 'dotenv/config'; 
+import config from '../src/config/index.js';
+
 // Initialize Stripe with your secret key
-const stripe = new Stripe(process.env.SECRET_KEY); // Replace with your Stripe secret key
+const stripe = new Stripe(config.stripe.secretKey); // Replace with your Stripe secret key
 export const CheckoutSession=async (req, res) => {
 
     const { items, totalPrice, personalInfo } = req.body;

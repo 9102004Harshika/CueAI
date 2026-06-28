@@ -1,11 +1,12 @@
-
 import { SignupModel } from "../models/Signup.js"
 import nodemailer from "nodemailer"
 import NodeCache from 'node-cache';
 import { PromptModel } from "../models/Prompt.js";
 import jwt from "jsonwebtoken"
-import bcrypt from "bcrypt"
-import crypto from "crypto"
+import bcrypt from 'bcrypt';
+import config from '../src/config/index.js';
+
+import geoip from 'geoip-lite';
 
 
 
@@ -97,9 +98,9 @@ export const VerifyOtpAndLogin = async (req, res) => {
 
     // Generate JWT token
     const token = jwt.sign(
-      { userId: user._id, email: user.email, accountType: user.accountType },
-      process.env.JWT_SECRET,
-      { expiresIn: '24h' }
+      { email: user.email, id: user._id },
+      config.security.jwtSecret,
+      { expiresIn: "1h" }
     );
 
     // Clean up the OTP (remove it from memory)

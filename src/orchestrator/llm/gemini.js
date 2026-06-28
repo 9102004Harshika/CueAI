@@ -3,9 +3,10 @@ import config from '../config.js';
 import logger from '../logger.js';
 
 class OpenRouterProvider {
-    async generate(prompt) {
+    async generate(prompt, overrideModel = null) {
         // For OpenRouter, models typically look like "google/gemini-2.5-flash"
-        const modelName = config.model.includes('/') ? config.model : `google/${config.model}`;
+        const targetModel = overrideModel || config.model;
+        const modelName = targetModel.includes('/') ? targetModel : `google/${targetModel}`;
         logger.system(`Calling OpenRouter API (${modelName})...`);
         
         try {

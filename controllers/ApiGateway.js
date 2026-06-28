@@ -1,5 +1,6 @@
 import { SignupModel as User } from '../models/Signup.js';
 import crypto from 'crypto';
+import config from '../src/config/index.js';
 
 export const generateApiKey = async (req, res) => {
     try {
@@ -12,7 +13,7 @@ export const generateApiKey = async (req, res) => {
         }
 
         // Generate secure key
-        const rawKey = `cue_${process.env.NODE_ENV === 'production' ? 'prod' : 'test'}_${crypto.randomBytes(24).toString('hex')}`;
+        const rawKey = `cue_${config.app.env === 'production' ? 'prod' : 'test'}_${crypto.randomBytes(24).toString('hex')}`;
         
         // Hash for storage
         const keyHash = crypto.createHash('sha256').update(rawKey).digest('hex');

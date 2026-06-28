@@ -28,7 +28,11 @@ import { getFeed, createPost, likePost } from './controllers/Feed.js';
 import { SubmitIssue } from './controllers/Issue.js';
 import { startOrchestrator } from './src/orchestrator/index.js';
 
+import config from './src/config/index.js';
+
 const app = express();
+
+
 
 // Middleware
 app.use(express.json());
@@ -39,7 +43,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // MongoDB connection
-const dbURI = process.env.MONGODB_URI;
+const dbURI = config.db.uri;
 mongoose.connect(dbURI, {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
@@ -118,7 +122,7 @@ app.post('/feed/create', createPost);
 app.post('/feed/:postId/like', likePost);
 
 // Start the server
-const PORT = process.env.PORT || 5000;
+const PORT = config.app.port;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
     // Optional: Start the autonomous orchestrator in the background
